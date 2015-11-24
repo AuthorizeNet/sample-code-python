@@ -6,17 +6,11 @@ merchantAuth = apicontractsv1.merchantAuthenticationType()
 merchantAuth.name = '5KP3u95bQpv'
 merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
 
-# create a customer payment profile
-profileToCharge = apicontractsv1.customerProfilePaymentType()
-profileToCharge.customerProfileId = "36731856"
-profileToCharge.paymentProfile = apicontractsv1.paymentProfile()
-profileToCharge.paymentProfile.paymentProfileId = "33211899"
 
 transactionrequest = apicontractsv1.transactionRequestType()
-transactionrequest.transactionType = "authCaptureTransaction"
-transactionrequest.amount = Decimal ('2.00')
-transactionrequest.profile = profileToCharge
-
+transactionrequest.transactionType = "voidTransaction"
+#set refTransId to transId of an unsettled transaction
+transactionrequest.refTransId ="2245440957"
 
 createtransactionrequest = apicontractsv1.createTransactionRequest()
 createtransactionrequest.merchantAuthentication = merchantAuth
@@ -29,6 +23,8 @@ createtransactioncontroller.execute()
 response = createtransactioncontroller.getresponse()
 
 if (response.messages.resultCode=="Ok"):
-	print "Transaction ID : %s" % response.transactionResponse.transId
+    print "Transaction ID : %s" % response.transactionResponse.transId
+    print response.transactionResponse.messages.message[0].description
 else:
-	print "response code: %s" % response.messages.resultCode
+    print "response code: %s" % response.messages.resultCode
+    print response.transactionResponse.errors.error[0].errorText
