@@ -10,7 +10,7 @@ merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
 profileToCharge = apicontractsv1.customerProfilePaymentType()
 profileToCharge.customerProfileId = "36731856"
 profileToCharge.paymentProfile = apicontractsv1.paymentProfile()
-paymentProfile.paymentProfileId = "33211899"
+profileToCharge.paymentProfile.paymentProfileId = "33211899"
 
 transactionrequest = apicontractsv1.transactionRequestType()
 transactionrequest.transactionType = "authCaptureTransaction"
