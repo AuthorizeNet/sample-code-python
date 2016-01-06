@@ -1,31 +1,39 @@
+import os, sys
+
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
 from decimal import *
 
-merchantAuth = apicontractsv1.merchantAuthenticationType()
-merchantAuth.name = '5KP3u95bQpv'
-merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+def capture_previously_authorized_amount():
+	merchantAuth = apicontractsv1.merchantAuthenticationType()
+	merchantAuth.name = '5KP3u95bQpv'
+	merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
 
 
-transactionrequest = apicontractsv1.transactionRequestType()
-transactionrequest.transactionType = "priorAuthCaptureTransaction"
-transactionrequest.amount = Decimal ('2.55')
-transactionrequest.refTransId = "2245440574"
+	transactionrequest = apicontractsv1.transactionRequestType()
+	transactionrequest.transactionType = "priorAuthCaptureTransaction"
+	transactionrequest.amount = Decimal ('2.55')
+	transactionrequest.refTransId = "2245440574"
 
 
 
-createtransactionrequest = apicontractsv1.createTransactionRequest()
-createtransactionrequest.merchantAuthentication = merchantAuth
-createtransactionrequest.refId = "MerchantID-0001"
+	createtransactionrequest = apicontractsv1.createTransactionRequest()
+	createtransactionrequest.merchantAuthentication = merchantAuth
+	createtransactionrequest.refId = "MerchantID-0001"
 
-createtransactionrequest.transactionRequest = transactionrequest
-createtransactioncontroller = createTransactionController(createtransactionrequest)
-createtransactioncontroller.execute()
+	createtransactionrequest.transactionRequest = transactionrequest
+	createtransactioncontroller = createTransactionController(createtransactionrequest)
+	createtransactioncontroller.execute()
 
-response = createtransactioncontroller.getresponse()
+	response = createtransactioncontroller.getresponse()
 
-if (response.messages.resultCode=="Ok"):
-    print "Transaction ID : %s" % response.transactionResponse.transId
-    print response.transactionResponse.messages.message[0].description
-else:
-    print "response code: %s" % response.messages.resultCode
+	if (response.messages.resultCode=="Ok"):
+	    print "Transaction ID : %s" % response.transactionResponse.transId
+	    print response.transactionResponse.messages.message[0].description
+	else:
+	    print "response code: %s" % response.messages.resultCode
+
+	return response
+
+if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+	capture_previously_auhtorized_amount()
