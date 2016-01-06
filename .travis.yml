@@ -1,2 +1,12 @@
+language: python
+sudo: false
+
+python:
+  - "2.7"
+  - "pypy"
+
+install:
+ - pip install authorizenet
+
 script:
   python test-runner.py
