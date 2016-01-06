@@ -538,6 +538,9 @@ class TestRunner(unittest.TestCase):
 		return modl.decrypt_visa_checkout_data()
 
 	def validate_response(self, response):
+		if(response is None):
+			return False
+			
 		if (response.messages.resultCode != apicontractsv1.messageTypeEnum.Ok):
 			return False
 
@@ -545,6 +548,7 @@ class TestRunner(unittest.TestCase):
 		
 	def test_all_sample_codes(self):
 		failed = []
+		succeeded = [] 
 		f = open('list_of_sample_codes.txt', 'r')
 		for line in f:
 			#print(line)
@@ -559,14 +563,21 @@ class TestRunner(unittest.TestCase):
 				#print("Running : " + apiName)
 				response = getattr(self, apiName)()
 				if(self.validate_response(response)):
-					print("success")
+					succeeded.append(apiName)
 				else:
 					failed.append(apiName)
 				#self.assertTrue('FOO'.isupper())
 				#self.assertFalse('Foo'.isupper())
 
+		print("-------- Success ----------")
+		for line in succeeded:
+			print(line)
+
+		print("-------- Failed ----------")
 		for line in failed:
 			print(line)
+
+
 	#def test_sample(self):
 	#	response = getattr(self, 'get_subscription_status')()
 		
