@@ -537,8 +537,13 @@ class TestRunner(unittest.TestCase):
 		modl = imp.load_source('modulename', 'VisaCheckout/decrypt-visa-checkout-data.py')
 		return modl.decrypt_visa_checkout_data()
 
-	def test_all_sample_codes(self):	  
+	def validate_response(self, response):
+		if (response.messages.resultCode != apicontractsv1.messageTypeEnum.Ok):
+			return False
 
+		return True
+		
+	def test_all_sample_codes(self):
 		failed = []
 		f = open('list_of_sample_codes.txt', 'r')
 		for line in f:
@@ -550,17 +555,11 @@ class TestRunner(unittest.TestCase):
 
 			if(shouldApiRun == '0'):
 				print("Not runnning the test : " + apiName)
-			#elif(isDependent == '0'):
-				#response = getattr(testRunner, "Test" + apiName)()
-			#	print("Test" + apiName)
-			#else:
 			elif(shouldApiRun == '1'):
 				#print("Running : " + apiName)
 				response = getattr(self, apiName)()
-				if(response is not None):
-					if (response.messages.resultCode != apicontractsv1.messageTypeEnum.Ok):
-						failed.append(apiName)
-
+				if(self.validate_response(response)):
+					print("success")
 				else:
 					failed.append(apiName)
 				#self.assertTrue('FOO'.isupper())
