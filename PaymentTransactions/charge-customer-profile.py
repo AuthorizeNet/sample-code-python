@@ -1,13 +1,15 @@
 import os, sys
+import imp
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
+constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def charge_customer_profile(customerProfileId, paymentProfileId, amount):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
-	merchantAuth.name = '5KP3u95bQpv'
-	merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+	merchantAuth.name = constants.apiLoginId
+	merchantAuth.transactionKey = constants.transactionKey
 
 	# create a customer payment profile
 	profileToCharge = apicontractsv1.customerProfilePaymentType()
@@ -39,4 +41,4 @@ def charge_customer_profile(customerProfileId, paymentProfileId, amount):
 	return response
 
 if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
-	charge_customer_profile()
+	charge_customer_profile(constants.customerProfileId, constants.customerPaymentProfileId, constants.amount)

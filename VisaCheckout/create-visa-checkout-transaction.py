@@ -1,14 +1,16 @@
 import os, sys
+import imp
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
+constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def create_visa_checkout_transaction():
 
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
-	merchantAuth.name = '5KP3u95bQpv'
-	merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+	merchantAuth.name = constants.apiLoginId
+	merchantAuth.transactionKey = constants.transactionKey
 	# Populate the payment data
 	opaqueData = apicontractsv1.opaqueDataType()
 	opaqueData.dataDescriptor = "COMMON.VCO.ONLINE.PAYMENT"

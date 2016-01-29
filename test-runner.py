@@ -5,11 +5,6 @@ import random
 from authorizenet import apicontractsv1
 
 class TestRunner(unittest.TestCase):
-
-	apiLoginId = "5KP3u95bQpv"
-	transactionKey = "4Ktq966gC55GAX7S"
-	TransactionID = "2245440957"
-	payerID = "LM6NCLZ5RAKBY"
 	 
 	def getEmail(self):
 		return str(random.randint(0, 10000)) + "@test.com"
@@ -199,6 +194,8 @@ class TestRunner(unittest.TestCase):
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
 		modl.delete_customer_profile(customerProfileId)
+
+		return response
 
 	def get_hosted_profile_page(self):
 		print("get_hosted_profile_page")
@@ -555,30 +552,30 @@ class TestRunner(unittest.TestCase):
 			items = line.split('\t')
 			apiName = items[0]
 			isDependent = items[1]
-			shouldApiRun = items[2].split('\n')[0]		
+			shouldApiRun = items[2].rstrip()[0]		
 
 			if(shouldApiRun == '0'):
 				print("Not runnning the test : " + apiName)
 			elif(shouldApiRun == '1'):
 				#print("Running : " + apiName)
 				response = getattr(self, apiName)()
-				if(self.validate_response(response)):
-					succeeded.append(apiName)
-				else:
-					failed.append(apiName)
-				#self.assertTrue('FOO'.isupper())
-				#self.assertFalse('Foo'.isupper())
+				#if(self.validate_response(response)):
+				#	succeeded.append(apiName)
+				#else:
+				#	failed.append(apiName)
+				
+				self.assertTrue(self.validate_response(response))
 
-		print("-------- Success ----------")
-		for line in succeeded:
-			print(line)
+		#print("-------- Success ----------")
+		#for line in succeeded:
+		#	print(line)
 
-		print("-------- Failed ----------")
-		for line in failed:
-			print(line)
+		#print("-------- Failed ----------")
+		#for line in failed:
+		#	print(line)
 
 
 	#def test_sample(self):
-	#	response = getattr(self, 'get_subscription_status')()
+	#	self.assertTrue(self.get_customer_shipping_address())
 		
 unittest.main()

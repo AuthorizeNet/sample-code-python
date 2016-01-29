@@ -1,14 +1,16 @@
 import os, sys
+import imp
 
 # Gives error if an address is already present for the given customer Id
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
+constants = imp.load_source('modulename', 'constants.py')
 
 def create_customer_shipping_address(customerProfileId):
 	# Give merchant details
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
-	merchantAuth.name = '5KP3u95bQpv'
-	merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+	merchantAuth.name = constants.apiLoginId
+	merchantAuth.transactionKey = constants.transactionKey
 
 	# Give address details
 	officeAddress = apicontractsv1.customerAddressType();
@@ -44,4 +46,4 @@ def create_customer_shipping_address(customerProfileId):
 	return response
 
 if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
-	create_customer_shipping_address()
+	create_customer_shipping_address(constants.customerProfileId)

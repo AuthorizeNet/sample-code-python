@@ -1,13 +1,15 @@
 import os, sys
+import imp
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
+constants = imp.load_source('modulename', 'constants.py')
 
 def get_customer_shipping_address(customerProfileId, customerAddressId):
     # Give merchant details
     merchantAuth = apicontractsv1.merchantAuthenticationType()
-    merchantAuth.name = '5KP3u95bQpv'
-    merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+    merchantAuth.name = constants.apiLoginId
+    merchantAuth.transactionKey = constants.transactionKey
 
     # create get shipping address request
     getShippingAddress = apicontractsv1.getCustomerShippingAddressRequest()
@@ -37,4 +39,4 @@ def get_customer_shipping_address(customerProfileId, customerAddressId):
     return response
 
 if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
-    get_customer_shipping_address()
+    get_customer_shipping_address(constants.customerProfileId, constants.customerProfileShippingId)

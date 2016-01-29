@@ -1,13 +1,15 @@
 import os, sys
+import imp
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
+constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def get_hosted_profile_page(customerProfileId):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
-	merchantAuth.name = '5KP3u95bQpv'
-	merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+	merchantAuth.name = constants.apiLoginId
+	merchantAuth.transactionKey = constants.transactionKey
 
 	setting = apicontractsv1.settingType()
 	setting.settingName = apicontractsv1.settingNameEnum.hostedProfileReturnUrl
@@ -43,4 +45,4 @@ def get_hosted_profile_page(customerProfileId):
 	return profilePageResponse
 
 if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
-	get_hosted_profile_page()
+	get_hosted_profile_page(constants.customerProfileId)
