@@ -8,7 +8,7 @@ merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
 request = apicontractsv1.ARBGetSubscriptionStatusRequest()
 request.merchantAuthentication = merchantAuth
 request.refId = "Sample"
-request.subscriptionId = "294541"
+request.subscriptionId = "2260421"
 # Executing the controller
 controller = ARBGetSubscriptionStatusController(request)
 controller.execute()
