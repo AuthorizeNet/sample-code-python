@@ -1,3 +1,4 @@
+
 # Sample Python Code for Authorize.Net
 This repository contains working code samples which demonstrate Python integration with the Authorize.Net Python SDK (https://github.com/AuthorizeNet/sdk-python).  
 The samples are organized just like our API, which you can also try out directly here: http://developer.authorize.net/api/reference
@@ -18,6 +19,10 @@ Install the Authorize.Net Python SDK
 ````  
 Run the individual samples e.g.   
 ````
-    $ python PaymentTransactions/charge-credit-card.rb 
+    $ python PaymentTransactions/charge-credit-card.py 
 ````
+
+
+# sample-code-python
+This repository contains working code samples which demonstrate python integration with the Authorize.Net API
 

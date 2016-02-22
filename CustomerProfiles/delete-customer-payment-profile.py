@@ -1,22 +1,32 @@
+import os, sys
+import imp
+
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
+constants = imp.load_source('modulename', 'constants.py')
 
-merchantAuth = apicontractsv1.merchantAuthenticationType()
-merchantAuth.name = '5KP3u95bQpv'
-merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+def delete_customer_payment_profile(customerProfileId, customerPaymentProfileId):
+	merchantAuth = apicontractsv1.merchantAuthenticationType()
+	merchantAuth.name = constants.apiLoginId
+	merchantAuth.transactionKey = constants.transactionKey
 
-deleteCustomerPaymentProfile = apicontractsv1.deleteCustomerPaymentProfileRequest()
-deleteCustomerPaymentProfile.merchantAuthentication = merchantAuth
-deleteCustomerPaymentProfile.customerProfileId = "10000"
-deleteCustomerPaymentProfile.customerPaymentProfileId = "20000"
+	deleteCustomerPaymentProfile = apicontractsv1.deleteCustomerPaymentProfileRequest()
+	deleteCustomerPaymentProfile.merchantAuthentication = merchantAuth
+	deleteCustomerPaymentProfile.customerProfileId = customerProfileId
+	deleteCustomerPaymentProfile.customerPaymentProfileId = customerPaymentProfileId
 
-deleteCustomerPaymentProfileController = deleteCustomerPaymentProfileController(deleteCustomerPaymentProfile)
-deleteCustomerPaymentProfileController.execute()
+	controller = deleteCustomerPaymentProfileController(deleteCustomerPaymentProfile)
+	controller.execute()
 
-response = deleteCustomerPaymentProfileController.getresponse()
+	response = controller.getresponse()
 
-if (response.messages.resultCode=="Ok"):
-	print "Successfully deleted customer payment profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
-else:
-	print response.messages.message[0].text
-	print "Failed to delete customer paymnet profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
+	if (response.messages.resultCode=="Ok"):
+		print "Successfully deleted customer payment profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
+	else:
+		print response.messages.message[0].text
+		print "Failed to delete customer paymnet profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
+
+	return response
+
+if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+	delete_customer_payment_profile(constants.customerProfileId, constants.customerPaymentProfileId)

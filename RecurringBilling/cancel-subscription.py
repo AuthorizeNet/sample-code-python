@@ -1,25 +1,35 @@
+import os, sys
+import imp
+
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
+constants = imp.load_source('modulename', 'constants.py')
 
-merchantAuth = apicontractsv1.merchantAuthenticationType()
-merchantAuth.name = '5KP3u95bQpv'
-merchantAuth.transactionKey = '4Ktq966gC55GAX7S'
+def cancel_subscription(subscriptionId):
+	merchantAuth = apicontractsv1.merchantAuthenticationType()
+	merchantAuth.name = constants.apiLoginId
+	merchantAuth.transactionKey = constants.transactionKey
 
-request = apicontractsv1.ARBCancelSubscriptionRequest()
-request.merchantAuthentication = merchantAuth
-request.refId = "Sample"
-request.subscriptionId = "2945617"
+	request = apicontractsv1.ARBCancelSubscriptionRequest()
+	request.merchantAuthentication = merchantAuth
+	request.refId = "Sample"
+	request.subscriptionId = subscriptionId
 
-controller = ARBCancelSubscriptionController(request)
-controller.execute()
+	controller = ARBCancelSubscriptionController(request)
+	controller.execute()
 
-response = controller.getresponse()
+	response = controller.getresponse()
 
-if (response.messages.resultCode=="Ok"):
-    print "SUCCESS"
-    print "Message Code : %s" % response.messages.message[0].code
-    print "Message text : %s" % response.messages.message[0].text
-else:
-    print "ERROR"
-    print "Message Code : %s" % response.messages.message[0].code
-    print "Message text : %s" % response.messages.message[0].text
+	if (response.messages.resultCode=="Ok"):
+	    print "SUCCESS"
+	    print "Message Code : %s" % response.messages.message[0].code
+	    print "Message text : %s" % response.messages.message[0].text
+	else:
+	    print "ERROR"
+	    print "Message Code : %s" % response.messages.message[0].code
+	    print "Message text : %s" % response.messages.message[0].text
+
+	return response
+
+if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+	cancel_subscription(constants.subscriptionId)
