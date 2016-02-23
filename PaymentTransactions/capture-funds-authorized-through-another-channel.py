@@ -1,5 +1,6 @@
 import os, sys
 import imp
+import random
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
@@ -7,6 +8,9 @@ constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def capture_funds_authorized_through_another_channel():
+
+	amount = str(round(random.random()*100, 2))
+
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
@@ -20,7 +24,7 @@ def capture_funds_authorized_through_another_channel():
 
 	transactionrequest = apicontractsv1.transactionRequestType()
 	transactionrequest.transactionType = "captureOnlyTransaction"
-	transactionrequest.amount = Decimal ('1.55')
+	transactionrequest.amount = Decimal (amount)
 	transactionrequest.payment = payment
 	transactionrequest.authCode = "ROHNFQ"
 
