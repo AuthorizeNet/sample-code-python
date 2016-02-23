@@ -1,5 +1,7 @@
 import os, sys
 import imp
+import random
+
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
@@ -8,6 +10,9 @@ from decimal import *
 from authorizenet.apicontractsv1 import bankAccountType, accountTypeEnum
 
 def debit_bank_account():
+
+	amount = str(round(random.random()*100, 2))
+
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
@@ -24,7 +29,7 @@ def debit_bank_account():
 
 	transactionrequest = apicontractsv1.transactionRequestType()
 	transactionrequest.transactionType = "authCaptureTransaction"
-	transactionrequest.amount = Decimal ('2.55')
+	transactionrequest.amount = Decimal (amount)
 	transactionrequest.payment = payment
 	transactionrequest.payment.bankAccount = bankAccountType
 
