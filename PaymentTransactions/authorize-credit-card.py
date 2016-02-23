@@ -7,6 +7,9 @@ constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def authorize_credit_card():
+
+	amount = str(round(random.random()*100, 2)) 
+
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
@@ -20,7 +23,7 @@ def authorize_credit_card():
 
 	transactionrequest = apicontractsv1.transactionRequestType()
 	transactionrequest.transactionType = "authOnlyTransaction"
-	transactionrequest.amount = Decimal ('1.55')
+	transactionrequest.amount = Decimal (amount)
 	transactionrequest.payment = payment
 
 
