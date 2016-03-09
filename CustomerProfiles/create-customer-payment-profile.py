@@ -17,9 +17,14 @@ def create_customer_payment_profile(customerProfileId):
 	payment = apicontractsv1.paymentType()
 	payment.creditCard = creditCard
 
+	billTo = apicontractsv1.customerAddressType()
+	billTo.firstName = "John"
+	billTo.lastName = "Snow"
+	
 	profile = apicontractsv1.customerPaymentProfileType()
 	profile.payment = payment
-
+	profile.billTo = billTo
+	
 	createCustomerPaymentProfile = apicontractsv1.createCustomerPaymentProfileRequest()
 	createCustomerPaymentProfile.merchantAuthentication = merchantAuth
 	createCustomerPaymentProfile.paymentProfile = profile

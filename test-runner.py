@@ -444,6 +444,36 @@ class TestRunner(unittest.TestCase):
 		modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
 		return modl.create_subscription(self.getAmount(), self.getDay())
 
+		
+	def create_subscription_from_customer_profile(self):
+		print("create_subscription_from_customer_profile")
+		
+		#create customer profile
+		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+		profileResponse = modl.create_customer_profile()
+
+		#create customer payment profile for that above profile
+		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+		paymentProfileResponse = modl.create_customer_payment_profile(profileResponse.customerProfileId)
+
+		#Create customer shipping address 
+		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
+		shippingResponse = modl.create_customer_shipping_address(profileResponse.customerProfileId)		
+		
+		#Create subscripiton from customer profile
+		modl = imp.load_source('modulename', 'RecurringBilling/create-subscription-from-customer-profile.py')
+		response = modl.create_subscription_from_customer_profile(self.getAmount(), self.getDay(), profileResponse.customerProfileId, paymentProfileResponse.customerPaymentProfileId, shippingResponse.customerAddressId)
+		
+		#Cancel subscription
+		modl = imp.load_source('modulename', 'RecurringBilling/cancel-subscription.py')
+		modl.cancel_subscription(response.subscriptionId)
+
+		#delete newly create customer profile
+		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+		modl.delete_customer_profile(profileResponse.customerProfileId)
+
+		return response
+		
 	def get_list_of_subscription(self):
 		print("get_list_of_subscription")
 
