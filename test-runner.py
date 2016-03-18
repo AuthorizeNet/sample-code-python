@@ -10,7 +10,7 @@ class TestRunner(unittest.TestCase):
 		return str(random.randint(0, 10000)) + "@test.com"
 
 	def getAmount(self):
-		return random.randint(0, 10000)
+		return random.randint(0, 10000) * 1.12
 		
 	def getDay(self):
 		return random.randint(7, 365)
