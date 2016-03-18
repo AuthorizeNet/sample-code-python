@@ -1,7 +1,7 @@
 ﻿SampleCode	IsDependent	RunApi
 create_an_apple_pay_transaction	1	0
 create_customer_payment_profile	1	1
-create_customer_profile_from_transaction	1	0
+create_customer_profile_from_transaction	1	1
 create_customer_profile	1	1
 create_customer_shipping_address	1	1
 delete_customer_payment_profile	1	1
@@ -35,8 +35,9 @@ credit	1	0
 get_details	1	0
 prior_authorization_capture	1	0
 void	1	0
-cancel_subscription	1	1
+cancel_subscription	1	0
 create_subscription	1	1
+create_subscription_from_customer_profile	1	1
 get_list_of_subscription	1	1
 get_subscription_status	1	0
 get_subscription	1	1
