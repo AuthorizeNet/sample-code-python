@@ -35,7 +35,7 @@ credit	1	0
 get_details	1	0
 prior_authorization_capture	1	0
 void	1	0
-cancel_subscription	1	1
+cancel_subscription	1	0
 create_subscription	1	1
 create_subscription_from_customer_profile	1	1
 get_list_of_subscription	1	1
