@@ -17,8 +17,16 @@ def update_subscription(subscriptionId):
 	payment = apicontractsv1.paymentType()
 	payment.creditCard = creditcard
 
+	#set profile information
+	profile = apicontractsv1.customerProfileIdType()
+	profile.customerProfileId = "121212";
+	profile.customerPaymentProfileId = "131313";
+	profile.customerAddressId = "141414";
+	
 	subscription = apicontractsv1.ARBSubscriptionType()
 	subscription.payment = payment
+	#to update customer profile information
+	#subscription.profile = profile
 
 	request = apicontractsv1.ARBUpdateSubscriptionRequest()
 	request.merchantAuthentication = merchantAuth

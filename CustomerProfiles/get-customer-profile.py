@@ -28,6 +28,11 @@ def get_customer_profile(customerProfileId):
 			print "Last Name %s" % ship.lastName
 			print "Address %s" % ship.address
 			print "Customer Address ID %s" % ship.customerAddressId
+
+		if response.subscriptionIds:
+			print "list of subscriptionid:"
+			for subscriptionid in response.subscriptionIds.subscriptionId:
+				print subscriptionid
 	else:
 		print "response code: %s" % response.messages.resultCode
 		print "Failed to get customer profile information with id %s" % getCustomerProfile.customerProfileId
