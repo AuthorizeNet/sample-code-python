@@ -31,6 +31,11 @@ def get_customer_shipping_address(customerProfileId, customerAddressId):
         print response.address.state
         print response.address.zip
         print response.address.country
+
+        if response.subscriptionIds:
+            print "list of subscriptionid:"
+            for subscriptionid in response.subscriptionIds.subscriptionId:
+                print subscriptionid
     else:
         print "ERROR"
         print "Message code : %s " % response.messages.message[0].code
