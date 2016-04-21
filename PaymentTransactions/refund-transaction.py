@@ -12,8 +12,8 @@ def refund_transaction(refTransId):
 	merchantAuth.transactionKey = constants.transactionKey
 
 	creditCard = apicontractsv1.creditCardType()
-	creditCard.cardNumber = "4111111111111111"
-	creditCard.expirationDate = "2020-12"
+	creditCard.cardNumber = "0015"
+	creditCard.expirationDate = "XXXX"
 
 	payment = apicontractsv1.paymentType()
 	payment.creditCard = creditCard
@@ -40,6 +40,10 @@ def refund_transaction(refTransId):
 	    print "Transaction ID : %s" % response.transactionResponse.transId
 	else:
 	    print "response code: %s" % response.messages.resultCode
+	    print "Message code: %s" % response.messages.message[0].code
+	    print "Message text: %s" % response.messages.message[0].text
+	    print "Transaction Error Code: %s" % response.transactionResponse.errors.error[0].errorCode
+	    print "Transaction Error Text: %s" % response.transactionResponse.errors.error[0].errorText
 
 	return response
 
