@@ -15,7 +15,7 @@ def create_subscription(amount, days):
 	merchantAuth.transactionKey = constants.transactionKey
 	# Setting payment schedule
 	paymentschedule = apicontractsv1.paymentScheduleType()
-	paymentschedule.interval = apicontractsv1.CTD_ANON()
+	paymentschedule.interval = apicontractsv1.paymentScheduleTypeInterval() #apicontractsv1.CTD_ANON() #modified by krgupta
 	paymentschedule.interval.length = days
 	paymentschedule.interval.unit = apicontractsv1.ARBSubscriptionUnitEnum.days
 	paymentschedule.startDate = datetime(2020, 8, 30)
@@ -52,7 +52,7 @@ def create_subscription(amount, days):
 	if (response.messages.resultCode=="Ok"):
 		print "SUCCESS:"
 		print "Message Code : %s" % response.messages.message[0].code
-		print "Message text : %s" % response.messages.message[0].text
+		print "Message text : %s" % str(response.messages.message[0].text)
 		print "Subscription ID : %s" % response.subscriptionId
 	else:
 		print "ERROR:" 

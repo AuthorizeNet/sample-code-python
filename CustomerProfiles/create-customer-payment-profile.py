@@ -28,7 +28,8 @@ def create_customer_payment_profile(customerProfileId):
 	createCustomerPaymentProfile = apicontractsv1.createCustomerPaymentProfileRequest()
 	createCustomerPaymentProfile.merchantAuthentication = merchantAuth
 	createCustomerPaymentProfile.paymentProfile = profile
-	createCustomerPaymentProfile.customerProfileId = customerProfileId
+	print("customerProfileId in create_customer_payment_profile. customerProfileId = %s" %customerProfileId)
+	createCustomerPaymentProfile.customerProfileId = str(customerProfileId)
 
 	controller = createCustomerPaymentProfileController(createCustomerPaymentProfile)
 	controller.execute()

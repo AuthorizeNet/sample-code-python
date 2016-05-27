@@ -23,11 +23,14 @@ def get_customer_payment_profile(customerProfileId, customerPaymentProfileId):
 
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully retrieved a payment profile with profile id %s and customer id %s" % (getCustomerPaymentProfile.customerProfileId, getCustomerPaymentProfile.customerProfileId)	
-
+		'''
 		if response.paymentProfile.subscriptionIds:
 			print "list of subscriptionid:"
 			for subscriptionid in response.paymentProfile.subscriptionIds.subscriptionId:
 				print subscriptionid
+		else: 							#added by krgupta
+			print "no subscription"     #added by krgupta		
+		'''		
 	else:
 		print "response code: %s" % response.messages.resultCode
 		print "Failed to get payment profile information with id %s" % getCustomerPaymentProfile.customerPaymentProfileId

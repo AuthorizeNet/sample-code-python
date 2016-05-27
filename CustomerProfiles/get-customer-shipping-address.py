@@ -24,18 +24,22 @@ def get_customer_shipping_address(customerProfileId, customerAddressId):
 
     if response.messages.resultCode == "Ok":
         print "SUCCESS"
-        print "The address is"
-        print response.address.firstName +" " + response.address.lastName
-        print response.address.address
-        print response.address.city
-        print response.address.state
-        print response.address.zip
-        print response.address.country
-
-        if response.subscriptionIds:
-            print "list of subscriptionid:"
-            for subscriptionid in response.subscriptionIds.subscriptionId:
-                print subscriptionid
+        if hasattr(response, 'address') == True:
+            print "The address is"
+            print response.address.firstName +" " + response.address.lastName
+            print response.address.address
+            print response.address.city
+            print response.address.state
+            print response.address.zip
+            print response.address.country
+        if not hasattr(response, 'subscriptionIds'):
+            print ("no subscriptionIds attr in response")
+        else:  
+            if hasattr(response, 'subscriptionIds') == True:
+                if hasattr(response.subscriptionIds, 'subscriptionId') == True:
+                    print "list of subscriptionid:"
+                    for subscriptionid in (response.subscriptionIds.subscriptionId):
+                        print subscriptionid
     else:
         print "ERROR"
         print "Message code : %s " % response.messages.message[0].code
