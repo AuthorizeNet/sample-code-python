@@ -25,7 +25,7 @@ def get_customer_payment_profile(customerProfileId, customerPaymentProfileId):
 		print "Successfully retrieved a payment profile with profile id %s and customer id %s" % (getCustomerPaymentProfile.customerProfileId, getCustomerPaymentProfile.customerProfileId)	
 		if hasattr(response, 'paymentProfile') == True:
 			if hasattr(response.paymentProfile, 'subscriptionIds') == True:
-				if hasattr(response.subscriptionIds, 'subscriptionId') == True:
+				if hasattr(response.paymentProfile.subscriptionIds, 'subscriptionId') == True:
 					print "list of subscriptionid:"
 					for subscriptionid in response.paymentProfile.subscriptionIds.subscriptionId:
 						print subscriptionid
