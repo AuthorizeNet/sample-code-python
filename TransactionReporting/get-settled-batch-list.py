@@ -26,20 +26,25 @@ def get_settled_batch_list():
 	if settledBatchListResponse is not None:
 		if settledBatchListResponse.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
 			print('Successfully got settled batch list!')
+			
+			#if hasattr(response, 'batch') == True:
+			#mylist = settledBatchListResponse.batchList.batch
 
 			for batchItem in settledBatchListResponse.batchList.batch:
+				#print ("LOOK batchItem   = %s" %batchItem)
 				print('Batch Id : %s' % batchItem.batchId)
 				print('Settlement State : %s' % batchItem.settlementState)
 				print('Payment Method : %s' % batchItem.paymentMethod)
 				print('Product : %s' % batchItem.product)
 
-				if batchItem.statistics:
-					for statistic in batchItem.statistics.statistic:
-						print('Account Type : %s' % statistic.accountType)
-						print('Charge Amount : %s' % statistic.chargeAmount)
-						print('Refund Amount : %s' % statistic.refundAmount)
-						print('Decline Count : %s' % statistic.declineCount)
-
+				if hasattr(settledBatchListResponse.batchList.batch, 'statistics') == True:
+					if hasattr(settledBatchListResponse.batchList.batch.statistics, 'statistic') == True:
+# 				if batchItem.statistics:
+	 					for statistic in batchItem.statistics.statistic: 
+	 						print('Account Type : %s' % statistic.accountType)
+	 						print('Charge Amount : %s' % statistic.chargeAmount)
+	 						print('Refund Amount : %s' % statistic.refundAmount)
+	 						print('Decline Count : %s' % statistic.declineCount)
 			if settledBatchListResponse.messages:
 				print('Message Code : %s' % settledBatchListResponse.messages.message[0].code)
 				print('Message Text : %s' % settledBatchListResponse.messages.message[0].text)

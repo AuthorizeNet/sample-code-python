@@ -15,7 +15,7 @@ def create_subscription_from_customer_profile(amount, days, profileId, paymentPr
 	merchantAuth.transactionKey = constants.transactionKey
 	# Setting payment schedule
 	paymentschedule = apicontractsv1.paymentScheduleType()
-	paymentschedule.interval = apicontractsv1.CTD_ANON()
+	paymentschedule.interval = apicontractsv1.paymentScheduleTypeInterval() #apicontractsv1.CTD_ANON() #modified by krgupta
 	paymentschedule.interval.length = days
 	paymentschedule.interval.unit = apicontractsv1.ARBSubscriptionUnitEnum.days
 	paymentschedule.startDate = datetime(2020, 8, 30)

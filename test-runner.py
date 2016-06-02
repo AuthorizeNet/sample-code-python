@@ -3,8 +3,10 @@ import sys
 import imp
 import random
 from authorizenet import apicontractsv1
+import pyxb
 
 class TestRunner(unittest.TestCase):
+	#pyxb.GlobalValidationConfig._setForBinding(False)
 	 
 	def getEmail(self):
 		return str(random.randint(0, 10000)) + "@test.com"
@@ -29,11 +31,11 @@ class TestRunner(unittest.TestCase):
 
 		#create customer payment profile for that above profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
-		response = modl.create_customer_payment_profile(response.customerProfileId)
+		response = modl.create_customer_payment_profile(str(response.customerProfileId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		modl.delete_customer_profile(response.customerProfileId)
+		modl.delete_customer_profile(str(response.customerProfileId))
 
 		return response
 
@@ -46,11 +48,11 @@ class TestRunner(unittest.TestCase):
 
 		#create customer payment profile for above transaction
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile-from-transaction.py')
-		response = modl.create_customer_profile_from_transaction(response.transactionResponse.transId)
+		response = modl.create_customer_profile_from_transaction(str(response.transactionResponse.transId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		modl.delete_customer_profile(response.customerProfileId)
+		modl.delete_customer_profile(str(response.customerProfileId))
 
 		return response
 
@@ -61,7 +63,7 @@ class TestRunner(unittest.TestCase):
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		modl.delete_customer_profile(response.customerProfileId)
+		modl.delete_customer_profile(str(response.customerProfileId))
 
 		return response
 
@@ -73,11 +75,11 @@ class TestRunner(unittest.TestCase):
 		response = modl.create_customer_profile()
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
-		response = modl.create_customer_shipping_address(response.customerProfileId)
+		response = modl.create_customer_shipping_address(str(response.customerProfileId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		modl.delete_customer_profile(response.customerProfileId)
+		modl.delete_customer_profile(str(response.customerProfileId))
 
 		return response
 
@@ -87,14 +89,14 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 		
 		#create customer payment profile for that above profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
-		response = modl.create_customer_payment_profile(response.customerProfileId)
+		response = modl.create_customer_payment_profile(str(response.customerProfileId))
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-payment-profile.py')
-		response = modl.delete_customer_payment_profile(customerProfileId, response.customerPaymentProfileId)
+		response = modl.delete_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
@@ -111,7 +113,7 @@ class TestRunner(unittest.TestCase):
 		response = modl.create_customer_profile()
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		return modl.delete_customer_profile(response.customerProfileId)
+		return modl.delete_customer_profile(str(response.customerProfileId))
 
 	def delete_customer_shipping_address(self):
 		print("delete_customer_shipping_address")
@@ -119,77 +121,77 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
 		response = modl.create_customer_shipping_address(customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-shipping-address.py')
-		response = modl.delete_customer_shipping_address(customerProfileId, response.customerAddressId)
+		response = modl.delete_customer_shipping_address(customerProfileId, str(response.customerAddressId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
 		modl.delete_customer_profile(customerProfileId)
 
 		return response
-
+	
 	def get_customer_payment_profile(self):
 		print("get_customer_payment_profile")
 
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 		
 		#create customer payment profile for that above profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
 		response = modl.create_customer_payment_profile(customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-payment-profile.py')
-		response = modl.get_customer_payment_profile(customerProfileId, response.customerPaymentProfileId)
+		response = modl.get_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 		
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
 		modl.delete_customer_profile(customerProfileId)
 
 		return response
-
+	
 
 	def get_customer_profile_ids(self):
 		print("get_customer_profile_ids")
 		modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-profile-ids.py')
 		return modl.get_customer_profile_ids()
-
+	
 	def get_customer_profile(self):
 		print("get_customer_profile")
-
+ 
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
-
+		customerProfileId = str(response.customerProfileId)
+ 
 		modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-profile.py')
 		response = modl.get_customer_profile(customerProfileId)
-
+ 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
 		modl.delete_customer_profile(customerProfileId)
-
+ 
 		return response
-
+	
 	def get_customer_shipping_address(self):
 		print("get_customer_shipping_address")
 
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
 		response = modl.create_customer_shipping_address(customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-shipping-address.py')
-		response = modl.get_customer_shipping_address(customerProfileId, response.customerAddressId)
+		response = modl.get_customer_shipping_address(customerProfileId, str(response.customerAddressId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
@@ -203,7 +205,7 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/get-hosted-profile-page.py')
 		response = modl.get_hosted_profile_page(customerProfileId)
@@ -220,14 +222,14 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 		
 		#create customer payment profile for that above profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
 		response = modl.create_customer_payment_profile(customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/update-customer-payment-profile.py')
-		response = modl.update_customer_payment_profile(customerProfileId, response.customerPaymentProfileId)
+		response = modl.update_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 		
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
@@ -241,7 +243,7 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 		
 		modl = imp.load_source('modulename', 'CustomerProfiles/update-customer-profile.py')
 		response = modl.update_customer_profile(customerProfileId)
@@ -258,13 +260,13 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
 		response = modl.create_customer_shipping_address(customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/update-customer-shipping-address.py')
-		response = modl.update_customer_shipping_address(customerProfileId, response.customerAddressId)
+		response = modl.update_customer_shipping_address(customerProfileId, str(response.customerAddressId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
@@ -279,14 +281,14 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 		
 		#create customer payment profile for that above profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
 		response = modl.create_customer_payment_profile(customerProfileId)
 
 		modl = imp.load_source('modulename', 'CustomerProfiles/validate-customer-payment-profile.py')
-		response = modl.validate_customer_payment_profile(customerProfileId, response.customerPaymentProfileId)
+		response = modl.validate_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 		
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
@@ -320,14 +322,14 @@ class TestRunner(unittest.TestCase):
 		#create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
 		response = modl.create_customer_profile()
-		customerProfileId = response.customerProfileId
+		customerProfileId = str(response.customerProfileId)
 		
 		#create customer payment profile for that above profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
 		response = modl.create_customer_payment_profile(customerProfileId)
 
 		modl = imp.load_source('modulename', 'PaymentTransactions/charge-customer-profile.py')
-		response = modl.charge_customer_profile(customerProfileId, response.customerPaymentProfileId, self.getAmount())
+		response = modl.charge_customer_profile(customerProfileId, str(response.customerPaymentProfileId), self.getAmount())
 		
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
@@ -380,7 +382,7 @@ class TestRunner(unittest.TestCase):
 		response = modl.authorization_and_capture(self.getAmount())
 
 		modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-and-capture-continue.py')
-		return modl.authorization_and_capture_continue(response.transactionResponse.transId, "6ZSCSYG33VP8Q")
+		return modl.authorization_and_capture_continue(str(response.transactionResponse.transId), "6ZSCSYG33VP8Q")
 
 	def authorization_and_capture(self):
 		print("authorization_and_capture")
@@ -409,7 +411,7 @@ class TestRunner(unittest.TestCase):
 		response = modl.authorization_and_capture(self.getAmount())
 
 		modl = imp.load_source('modulename', 'PaypalExpressCheckout/get-details.py')
-		return modl.get_details(response.transactionResponse.transId)
+		return modl.get_details(str(response.transactionResponse.transId))
 
 	def prior_authorization_capture(self):
 		print("prior_authorization_capture")
@@ -418,7 +420,7 @@ class TestRunner(unittest.TestCase):
 		response = modl.authorization_and_capture(self.getAmount())
 
 		modl = imp.load_source('modulename', 'PaypalExpressCheckout/prior-authorization-capture.py')
-		return modl.prior_authorization_capture(response.transactionResponse.transId)
+		return modl.prior_authorization_capture(str(response.transactionResponse.transId))
 
 	def void(self):
 		print("void")
@@ -427,7 +429,7 @@ class TestRunner(unittest.TestCase):
 		response = modl.authorization_and_capture(self.getAmount())
 
 		modl = imp.load_source('modulename', 'PaypalExpressCheckout/void.py')
-		return modl.void(response.transactionResponse.transId)
+		return modl.void(str(response.transactionResponse.transId))
 
 	def cancel_subscription(self):
 		print("cancel_subscription")
@@ -454,23 +456,23 @@ class TestRunner(unittest.TestCase):
 
 		#create customer payment profile for that above profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
-		paymentProfileResponse = modl.create_customer_payment_profile(profileResponse.customerProfileId)
+		paymentProfileResponse = modl.create_customer_payment_profile(str(profileResponse.customerProfileId))
 
 		#Create customer shipping address 
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
-		shippingResponse = modl.create_customer_shipping_address(profileResponse.customerProfileId)		
+		shippingResponse = modl.create_customer_shipping_address(str(profileResponse.customerProfileId))		
 		
 		#Create subscripiton from customer profile
 		modl = imp.load_source('modulename', 'RecurringBilling/create-subscription-from-customer-profile.py')
-		response = modl.create_subscription_from_customer_profile(self.getAmount(), self.getDay(), profileResponse.customerProfileId, paymentProfileResponse.customerPaymentProfileId, shippingResponse.customerAddressId)
+		response = modl.create_subscription_from_customer_profile(self.getAmount(), self.getDay(), str(profileResponse.customerProfileId), str(paymentProfileResponse.customerPaymentProfileId), str(shippingResponse.customerAddressId))
 		
 		#Cancel subscription
 		modl = imp.load_source('modulename', 'RecurringBilling/cancel-subscription.py')
-		modl.cancel_subscription(response.subscriptionId)
+		modl.cancel_subscription(str(response.subscriptionId))
 
 		#delete newly create customer profile
 		modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		modl.delete_customer_profile(profileResponse.customerProfileId)
+		modl.delete_customer_profile(str(profileResponse.customerProfileId))
 
 		return response
 		
@@ -500,7 +502,7 @@ class TestRunner(unittest.TestCase):
 
 		modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
 		response = modl.create_subscription(self.getAmount(), self.getDay())
-		subscriptionId = response.subscriptionId
+		subscriptionId = str(response.subscriptionId)
 
 		modl = imp.load_source('modulename', 'RecurringBilling/get-subscription.py')
 		response = modl.get_subscription(subscriptionId)
@@ -515,7 +517,7 @@ class TestRunner(unittest.TestCase):
 
 		modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
 		response = modl.create_subscription(self.getAmount(), self.getDay())
-		subscriptionId = response.subscriptionId
+		subscriptionId = str(response.subscriptionId)
 
 		modl = imp.load_source('modulename', 'RecurringBilling/update-subscription.py')
 		response = modl.update_subscription(subscriptionId)
