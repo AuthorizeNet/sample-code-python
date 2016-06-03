@@ -1,5 +1,7 @@
-
 # Sample Python Code for Authorize.Net
+[![Build Status](https://travis-ci.org/AuthorizeNet/sample-code-python.png?branch=master)]
+(https://travis-ci.org/AuthorizeNet/sample-code-python)
+
 This repository contains working code samples which demonstrate Python integration with the Authorize.Net Python SDK (https://github.com/AuthorizeNet/sdk-python).  
 The samples are organized just like our API, which you can also try out directly here: http://developer.authorize.net/api/reference
 
