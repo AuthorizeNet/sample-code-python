@@ -231,10 +231,10 @@ class TestRunner(unittest.TestCase):
 		if hasattr(response, 'customerProfileId') == True:
 			modl = imp.load_source('modulename', 'CustomerProfiles/update-customer-payment-profile.py')
 			response = modl.update_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
-		
-		    #delete newly create customer profile
-		    modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		    modl.delete_customer_profile(customerProfileId)
+			
+			#delete newly create customer profile
+			modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+		 	modl.delete_customer_profile(customerProfileId)
 
 		return response
 
