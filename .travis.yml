@@ -3,7 +3,8 @@ sudo: false
 
 python:
   - "2.7"
-
+  - "pypy"
+  
 install:
  - pip install authorizenet
 
