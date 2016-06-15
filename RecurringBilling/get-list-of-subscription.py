@@ -15,7 +15,7 @@ def get_list_of_subscription():
 	sorting.orderDescending = "false"
 
 	paging = apicontractsv1.Paging()
-	paging.limit = 1000
+	paging.limit = 100
 	paging.offset = 1
 
 	request = apicontractsv1.ARBGetSubscriptionListRequest()
