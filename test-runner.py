@@ -580,6 +580,7 @@ class TestRunner(unittest.TestCase):
 		failed = []
 		succeeded = [] 
 		f = open('list_of_sample_codes.txt', 'r')
+		numRetries = 3;
 		for line in f:
 			#print(line)
 			items = line.split('\t')
@@ -588,15 +589,19 @@ class TestRunner(unittest.TestCase):
 			shouldApiRun = items[2].rstrip()[0]		
 
 			if(shouldApiRun == '0'):
-				print("Not runnning the test : " + apiName)
-			elif(shouldApiRun == '1'):
-				#print("Running : " + apiName)
-				response = getattr(self, apiName)()
-				#if(self.validate_response(response)):
-				#	succeeded.append(apiName)
-				#else:
-				#	failed.append(apiName)
+				continue
 				
+			if(shouldApiRun == '1'):
+				for i in range(0, numRetries):
+					#print("Running : " + apiName)
+					response = getattr(self, apiName)()
+					#if(self.validate_response(response)):
+					#	succeeded.append(apiName)
+					#else:
+					#	failed.append(apiName)
+					
+					if self.validate_response(response) == True:
+						break;
 				self.assertTrue(self.validate_response(response))
 
 		#print("-------- Success ----------")
