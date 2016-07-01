@@ -4,6 +4,7 @@ import imp
 import random
 from authorizenet import apicontractsv1
 import pyxb
+import time
 
 class TestRunner(unittest.TestCase):
 	#pyxb.GlobalValidationConfig._setForBinding(False)
@@ -463,6 +464,8 @@ class TestRunner(unittest.TestCase):
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
 		shippingResponse = modl.create_customer_shipping_address(str(profileResponse.customerProfileId))		
 		
+		time.sleep(10)
+		
 		#Create subscripiton from customer profile
 		modl = imp.load_source('modulename', 'RecurringBilling/create-subscription-from-customer-profile.py')
 		response = modl.create_subscription_from_customer_profile(self.getAmount(), self.getDay(), str(profileResponse.customerProfileId), str(paymentProfileResponse.customerPaymentProfileId), str(shippingResponse.customerAddressId))
@@ -593,7 +596,10 @@ class TestRunner(unittest.TestCase):
 				
 			if(shouldApiRun == '1'):
 				for i in range(0, numRetries):
-					#print("Running : " + apiName)
+
+					print "-------------------------------"
+					print "Running : " + apiName
+					print "-------------------------------"
 					response = getattr(self, apiName)()
 					#if(self.validate_response(response)):
 					#	succeeded.append(apiName)
