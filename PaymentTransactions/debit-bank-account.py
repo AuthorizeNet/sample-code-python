@@ -46,7 +46,6 @@ def debit_bank_account():
 
 	if (response.messages.resultCode=="Ok"):
 	    print "Transaction ID : %s" % response.transactionResponse.transId
-	    print response.transactionResponse.messages.message[0].description
 	else:
 	    print "response code: %s" % response.messages.resultCode
 
