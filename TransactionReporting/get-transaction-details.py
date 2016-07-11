@@ -13,7 +13,7 @@ def get_transaction_details(transId):
 
 	transactionDetailsRequest = apicontractsv1.getTransactionDetailsRequest()
 	transactionDetailsRequest.merchantAuthentication = merchantAuth
-	transactionDetailsRequest.transId = transId
+	transactionDetailsRequest.transId = "40000276420"
 
 	transactionDetailsController = getTransactionDetailsController(transactionDetailsRequest)
 
@@ -30,6 +30,8 @@ def get_transaction_details(transId):
 			print('Transaction Status : %s' % transactionDetailsResponse.transaction.transactionStatus)
 			print('Auth Amount : %s' % transactionDetailsResponse.transaction.authAmount)
 			print('Settle Amount : %s' % transactionDetailsResponse.transaction.settleAmount)
+			if hasattr(transactionDetailsResponse.transaction, 'tax') == True:
+				print('Tax : %s' % transactionDetailsResponse.transaction.tax.amount)
 
 			if transactionDetailsResponse.messages:
 				print('Message Code : %s' % transactionDetailsResponse.messages.message[0].code)
