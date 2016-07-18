@@ -22,7 +22,7 @@ def delete_customer_profile(customerProfileId):
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully deleted customer with customer profile id %s" % deleteCustomerProfile.customerProfileId
 	else:
-		print response.messages.message[0].text
+		print response.messages.message[0]['text'].text
 		print "Failed to delete customer profile with customer profile id %s" % deleteCustomerProfile.customerProfileId
 
 	return response

@@ -44,7 +44,7 @@ def update_customer_payment_profile(customerProfileId, customerPaymentProfileId)
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully updated customer payment profile with id %s" % updateCustomerPaymentProfile.paymentProfile.customerPaymentProfileId
 	else:
-		print response.messages.message[0].text
+		print response.messages.message[0]['text'].text
 		print "Failed to update customer with customer payment profile id %s" % updateCustomerPaymentProfile.paymentProfile.customerPaymentProfileId
 
 	return response

@@ -26,7 +26,7 @@ def get_settled_batch_list():
 	if settledBatchListResponse is not None:
 		if settledBatchListResponse.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
 			print('Successfully got settled batch list!')
-			
+
 			#if hasattr(response, 'batch') == True:
 			#mylist = settledBatchListResponse.batchList.batch
 
@@ -40,17 +40,17 @@ def get_settled_batch_list():
 				if hasattr(settledBatchListResponse.batchList.batch, 'statistics') == True:
 					if hasattr(settledBatchListResponse.batchList.batch.statistics, 'statistic') == True:
 # 				if batchItem.statistics:
-	 					for statistic in batchItem.statistics.statistic: 
+	 					for statistic in batchItem.statistics.statistic:
 	 						print('Account Type : %s' % statistic.accountType)
 	 						print('Charge Amount : %s' % statistic.chargeAmount)
 	 						print('Refund Amount : %s' % statistic.refundAmount)
 	 						print('Decline Count : %s' % statistic.declineCount)
 			if settledBatchListResponse.messages:
-				print('Message Code : %s' % settledBatchListResponse.messages.message[0].code)
-				print('Message Text : %s' % settledBatchListResponse.messages.message[0].text)
+				print('Message Code : %s' % settledBatchListResponse.messages.message[0]['code'].text)
+				print('Message Text : %s' % settledBatchListResponse.messages.message[0]['text'].text)
 		else:
 			if settledBatchListResponse.messages:
-				print('Failed to get settled batch list.\nCode:%s \nText:%s' % (settledBatchListResponse.messages.message[0].code,settledBatchListResponse.messages.message[0].text))
+				print('Failed to get settled batch list.\nCode:%s \nText:%s' % (settledBatchListResponse.messages.message[0]['code'].text,settledBatchListResponse.messages.message[0]['text'].text))
 
 	return settledBatchListResponse
 

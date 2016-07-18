@@ -35,14 +35,14 @@ def authorization_only():
 
 	if (response.messages.resultCode=="Ok"):
 	    print "SUCCESS"
-	    print "Message Code : %s" % response.messages.message[0].code
-	    print "Message text : %s" % response.messages.message[0].text
+	    print "Message Code : %s" % response.messages.message[0]['code'].text
+	    print "Message text : %s" % response.messages.message[0]['text'].text
 	    print "Secure acceptance URL : %s " % response.transactionResponse.secureAcceptance.SecureAcceptanceUrl
 	    print "Transaction ID : %s " % response.transactionResponse.transId
 	else:
 	    print "ERROR"
-	    print "Message Code : %s" % response.messages.message[0].code
-	    print "Message text : %s" % response.messages.message[0].text
+	    print "Message Code : %s" % response.messages.message[0]['code'].text
+	    print "Message text : %s" % response.messages.message[0]['text'].text
 
 	return response
 

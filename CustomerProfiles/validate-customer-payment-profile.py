@@ -22,10 +22,10 @@ def validate_customer_payment_profile(customerProfileId, customerPaymentProfileI
 	response = validateCustomerPaymentProfileCntrlr.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print response.messages.message[0].text
+		print response.messages.message[0]['text'].text
 	else:
 		print "ERROR :  Validate Customer Payment Profile: Invalid response"
-		print "response code: %s %s" % {response.messages.message[0].code, response.messages.message[0].text}
+		print "response code: %s %s" % {response.messages.message[0]['code'].text, response.messages.message[0]['text'].text}
 
 	return response
 

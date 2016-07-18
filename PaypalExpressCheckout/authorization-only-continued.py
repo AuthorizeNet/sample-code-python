@@ -36,16 +36,16 @@ def authorization_only_continued():
 
     if (response.messages.resultCode=="Ok"):
         print "SUCCESS"
-        print "Message Code : %s" % response.messages.message[0].code
-        print "Message text : %s" % response.messages.message[0].text
+        print "Message Code : %s" % response.messages.message[0]['code'].text
+        print "Message text : %s" % response.messages.message[0]['text'].text
         if (response.transactionResponse.responseCode == "1" ):
             print "Description : %s " % response.transactionResponse.messages.message[0].description
             print "Payer Id : %s " % response.transactionResponse.secureAcceptance.PayerID
             print "Transaction ID : %s " % response.transactionResponse.transId
     else:
         print "ERROR"
-        print "Message Code : %s" % response.messages.message[0].code
-        print "Message text : %s" % response.messages.message[0].text
+        print "Message Code : %s" % response.messages.message[0]['code'].text
+        print "Message text : %s" % response.messages.message[0]['text'].text
 
     return response
 

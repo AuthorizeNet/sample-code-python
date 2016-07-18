@@ -20,11 +20,11 @@ def create_customer_payment_profile(customerProfileId):
 	billTo = apicontractsv1.customerAddressType()
 	billTo.firstName = "John"
 	billTo.lastName = "Snow"
-	
+
 	profile = apicontractsv1.customerPaymentProfileType()
 	profile.payment = payment
 	profile.billTo = billTo
-	
+
 	createCustomerPaymentProfile = apicontractsv1.createCustomerPaymentProfileRequest()
 	createCustomerPaymentProfile.merchantAuthentication = merchantAuth
 	createCustomerPaymentProfile.paymentProfile = profile
@@ -39,7 +39,7 @@ def create_customer_payment_profile(customerProfileId):
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully created a customer payment profile with id: %s" % response.customerPaymentProfileId
 	else:
-		print "Failed to create customer payment profile %s" % response.messages.message[0].text
+		print "Failed to create customer payment profile %s" % response.messages.message[0]['text'].text
 
 	return response
 

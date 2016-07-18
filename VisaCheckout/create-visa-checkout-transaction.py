@@ -39,8 +39,8 @@ def create_visa_checkout_transaction():
 	    print "Auth code : %s " % response.authCode
 	else:
 	    print "ERROR"
-	    print "Message Code : %s" % response.messages.message[0].code
-	    print "Message text : %s" % response.messages.message[0].text
+	    print "Message Code : %s" % response.messages.message[0]['code'].text
+	    print "Message text : %s" % response.messages.message[0]['text'].text
 
 	return response
 

@@ -20,10 +20,10 @@ def create_customer_profile_from_transaction(transactionId):
 	createCustomerProfileFromTransaction.transId = transactionId
 	#You can either specify the customer information in form of customerProfileBaseType object
 	createCustomerProfileFromTransaction.customer = profile
-	#  OR   
+	#  OR
 	# You can just provide the customer Profile ID
-	# createCustomerProfileFromTransaction.customerProfileId = "123343" 
-	
+	# createCustomerProfileFromTransaction.customerProfileId = "123343"
+
 	controller = createCustomerProfileFromTransactionController(createCustomerProfileFromTransaction)
 	controller.execute()
 
@@ -32,7 +32,7 @@ def create_customer_profile_from_transaction(transactionId):
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully created a customer profile with id: %s from transaction id: %s" % (response.customerProfileId, createCustomerProfileFromTransaction.transId)
 	else:
-		print "Failed to create customer payment profile from transaction %s" % response.messages.message[0].text
+		print "Failed to create customer payment profile from transaction %s" % response.messages.message[0]['text'].text
 
 	return response
 

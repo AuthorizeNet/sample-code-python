@@ -25,7 +25,7 @@ def create_customer_profile():
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully created a customer profile with id: %s" % response.customerProfileId
 	else:
-		print "Failed to create customer payment profile %s" % response.messages.message[0].text
+		print "Failed to create customer payment profile %s" % response.messages.message[0]['text'].text
 
 	return response
 
