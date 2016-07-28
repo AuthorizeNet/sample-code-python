@@ -26,10 +26,10 @@ def update_split_tender_group():
 
 
 	if (response.messages.resultCode=="Ok"):
-	    print response.messages.message[0].text
+	    print response.messages.message[0]['text'].text
 	else:
 	    print "response code: %s" % response.messages.resultCode
-	    print response.messages.message[0].text
+	    print response.messages.message[0]['text'].text
 
 	return response
 

@@ -36,11 +36,11 @@ def get_hosted_profile_page(customerProfileId):
 			print('Token : %s' % profilePageResponse.token)
 
 			if profilePageResponse.messages:
-				print('Message Code : %s' % profilePageResponse.messages.message[0].code)
-				print('Message Text : %s' % profilePageResponse.messages.message[0].text)
+				print('Message Code : %s' % profilePageResponse.messages.message[0]['code'].text)
+				print('Message Text : %s' % profilePageResponse.messages.message[0]['text'].text)
 		else:
 			if profilePageResponse.messages:
-				print('Failed to get batch statistics.\nCode:%s \nText:%s' % (profilePageResponse.messages.message[0].code,profilePageResponse.messages.message[0].text))
+				print('Failed to get batch statistics.\nCode:%s \nText:%s' % (profilePageResponse.messages.message[0]['code'].text,profilePageResponse.messages.message[0]['text'].text))
 
 	return profilePageResponse
 

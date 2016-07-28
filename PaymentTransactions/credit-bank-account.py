@@ -44,7 +44,7 @@ def credit_bank_account():
 	    print response.transactionResponse.messages.message[0].description
 	else:
 	    print "response code: %s" % response.messages.resultCode
-	    print response.messages.message[0].text
+	    print response.messages.message[0]['text'].text
 
 	return response
 

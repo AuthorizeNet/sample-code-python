@@ -24,13 +24,13 @@ def get_subscription_status(subscriptionId):
 
 	if (response.messages.resultCode=="Ok"):
 		print "SUCCESS:"
-		print "Message Code : %s" % response.messages.message[0].code
-		print "Message text : %s" % response.messages.message[0].text
+		print "Message Code : %s" % response.messages.message[0]['code'].text
+		print "Message text : %s" % response.messages.message[0]['text'].text
 		print "Subscription Status : %s" % response.status
 	else:
-		print "ERROR:" 
-		print "Message Code : %s" % response.messages.message[0].code
-		print "Message text : %s" % response.messages.message[0].text
+		print "ERROR:"
+		print "Message Code : %s" % response.messages.message[0]['code'].text
+		print "Message text : %s" % response.messages.message[0]['text'].text
 
 	return response
 

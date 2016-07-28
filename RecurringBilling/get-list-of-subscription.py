@@ -32,13 +32,13 @@ def get_list_of_subscription():
 
 	if (response.messages.resultCode=="Ok"):
 	    print "SUCCESS"
-	    print "Message Code : %s" % response.messages.message[0].code
-	    print "Message text : %s" % response.messages.message[0].text
+	    print "Message Code : %s" % response.messages.message[0]['code'].text
+	    print "Message text : %s" % response.messages.message[0]['text'].text
 	    print "Total Number In Results : %s" % response.totalNumInResultSet
 	else:
 	    print "ERROR"
-	    print "Message Code : %s" % response.messages.message[0].code
-	    print "Message text : %s" % response.messages.message[0].text
+	    print "Message Code : %s" % response.messages.message[0]['code'].text
+	    print "Message text : %s" % response.messages.message[0]['text'].text
 
 	return response
 

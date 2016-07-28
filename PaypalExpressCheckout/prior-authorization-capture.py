@@ -36,16 +36,16 @@ def prior_authorization_capture(refTransId):
 
     if (response.messages.resultCode=="Ok"):
         print "SUCCESS"
-        print "Message Code : %s" % response.messages.message[0].code
-        print "Message text : %s" % response.messages.message[0].text
+        print "Message Code : %s" % response.messages.message[0]['code'].text
+        print "Message text : %s" % response.messages.message[0]['text'].text
         print "Auth code : %s " % response.transactionResponse.authCode
         if (response.transactionResponse.responseCode == "1" ):
             print "Description : %s " % response.transactionResponse.messages.message[0].description
             print "Transaction ID : %s " % response.transactionResponse.transId
     else:
         print "ERROR"
-        print "Message Code : %s" % response.messages.message[0].code
-        print "Message text : %s" % response.messages.message[0].text
+        print "Message Code : %s" % response.messages.message[0]['code'].text
+        print "Message text : %s" % response.messages.message[0]['text'].text
 
     return response
 

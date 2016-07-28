@@ -23,7 +23,7 @@ def delete_customer_payment_profile(customerProfileId, customerPaymentProfileId)
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully deleted customer payment profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
 	else:
-		print response.messages.message[0].text
+		print response.messages.message[0]['text'].text
 		print "Failed to delete customer paymnet profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
 
 	return response

@@ -36,12 +36,12 @@ def update_customer_shipping_address(customerProfileId, customerAddressId):
 
 	if response.messages.resultCode == "Ok":
 	    print "SUCCESS"
-	    print "Message code : %s " % response.messages.message[0].code
-	    print "Message text : %s " % response.messages.message[0].text
+	    print "Message code : %s " % response.messages.message[0]['code'].text
+	    print "Message text : %s " % response.messages.message[0]['text'].text
 	else:
 	    print "ERROR"
-	    print "Message code : %s " % response.messages.message[0].code
-	    print "Message text : %s " % response.messages.message[0].text
+	    print "Message code : %s " % response.messages.message[0]['code'].text
+	    print "Message text : %s " % response.messages.message[0]['text'].text
 
 	return response
 

@@ -34,7 +34,7 @@ def get_customer_shipping_address(customerProfileId, customerAddressId):
             print response.address.country
         if not hasattr(response, 'subscriptionIds'):
             print ("no subscriptionIds attr in response")
-        else:  
+        else:
             if hasattr(response, 'subscriptionIds') == True:
                 if hasattr(response.subscriptionIds, 'subscriptionId') == True:
                     print "list of subscriptionid:"
@@ -42,8 +42,8 @@ def get_customer_shipping_address(customerProfileId, customerAddressId):
                         print subscriptionid
     else:
         print "ERROR"
-        print "Message code : %s " % response.messages.message[0].code
-        print "Message text : %s " % response.messages.message[0].text
+        print "Message code : %s " % response.messages.message[0]['code'].text
+        print "Message text : %s " % response.messages.message[0]['text'].text
 
     return response
 

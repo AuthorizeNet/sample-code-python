@@ -40,8 +40,8 @@ def refund_transaction(refTransId):
 	    print "Transaction ID : %s" % response.transactionResponse.transId
 	else:
 	    print "response code: %s" % response.messages.resultCode
-	    print "Message code: %s" % response.messages.message[0].code
-	    print "Message text: %s" % response.messages.message[0].text
+	    print "Message code: %s" % response.messages.message[0]['code'].text
+	    print "Message text: %s" % response.messages.message[0]['text'].text
 	    print "Transaction Error Code: %s" % response.transactionResponse.errors.error[0].errorCode
 	    print "Transaction Error Text: %s" % response.transactionResponse.errors.error[0].errorText
 

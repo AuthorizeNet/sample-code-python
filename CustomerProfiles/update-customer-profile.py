@@ -27,7 +27,7 @@ def update_customer_profile(customerProfileId):
 	if (response.messages.resultCode=="Ok"):
 		print "Successfully updated customer with customer profile id %s" % updateCustomerProfile.profile.customerProfileId
 	else:
-		print response.messages.message[0].text
+		print response.messages.message[0]['text'].text
 		print "Failed to update customer profile with customer profile id %s" % updateCustomerProfile.profile.customerProfileId
 
 	return response

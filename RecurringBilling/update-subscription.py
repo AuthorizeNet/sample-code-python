@@ -22,7 +22,7 @@ def update_subscription(subscriptionId):
 	profile.customerProfileId = "121212";
 	profile.customerPaymentProfileId = "131313";
 	profile.customerAddressId = "141414";
-	
+
 	subscription = apicontractsv1.ARBSubscriptionType()
 	subscription.payment = payment
 	#to update customer profile information
@@ -41,12 +41,12 @@ def update_subscription(subscriptionId):
 
 	if (response.messages.resultCode=="Ok"):
 	    print "SUCCESS"
-	    print "Message Code : %s" % response.messages.message[0].code
-	    print "Message text : %s" % response.messages.message[0].text
+	    print "Message Code : %s" % response.messages.message[0]['code'].text
+	    print "Message text : %s" % response.messages.message[0]['text'].text
 	else:
 	    print "ERROR"
-	    print "Message Code : %s" % response.messages.message[0].code
-	    print "Message text : %s" % response.messages.message[0].text
+	    print "Message Code : %s" % response.messages.message[0]['code'].text
+	    print "Message text : %s" % response.messages.message[0]['text'].text
 
 	return response
 
