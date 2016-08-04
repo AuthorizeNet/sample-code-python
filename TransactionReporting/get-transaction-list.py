@@ -32,13 +32,13 @@ def get_transaction_list():
 				print('Settle Amount : %s' % transaction.settleAmount)
 
 			if transactionListResponse.messages:
-				print('Message Code : %s' % transactionListResponse.messages.message[0].code)
-				print('Message Text : %s' % transactionListResponse.messages.message[0].text)
+				print('Message Code : %s' % transactionListResponse.messages.message[0]['code'].text)
+				print('Message Text : %s' % transactionListResponse.messages.message[0]['text'].text)
 		else:
 			if transactionListResponse.messages:
-				print('Failed to get transaction list.\nCode:%s \nText:%s' % (transactionListResponse.messages.message[0].code,transactionListResponse.messages.message[0].text))
+				print('Failed to get transaction list.\nCode:%s \nText:%s' % (transactionListResponse.messages.message[0]['code'].text,transactionListResponse.messages.message[0]['text'].text))
 
 	return transactionListResponse
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	get_transaction_list()

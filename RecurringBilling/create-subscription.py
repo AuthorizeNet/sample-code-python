@@ -50,16 +50,16 @@ def create_subscription(amount, days):
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "SUCCESS:"
-		print "Message Code : %s" % response.messages.message[0].code
-		print "Message text : %s" % str(response.messages.message[0].text)
-		print "Subscription ID : %s" % response.subscriptionId
+		print ("SUCCESS:")
+		print ("Message Code : %s" % response.messages.message[0]['code'].text)
+		print ("Message text : %s" % str(response.messages.message[0]['text'].text))
+		print ("Subscription ID : %s" % response.subscriptionId)
 	else:
-		print "ERROR:" 
-		print "Message Code : %s" % response.messages.message[0].code
-		print "Message text : %s" % response.messages.message[0].text
+		print ("ERROR:")
+		print ("Message Code : %s" % response.messages.message[0]['code'].text)
+		print ("Message text : %s" % response.messages.message[0]['text'].text)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	create_subscription(constants.amount, constants.days)

@@ -25,12 +25,12 @@ def update_customer_profile(customerProfileId):
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Successfully updated customer with customer profile id %s" % updateCustomerProfile.profile.customerProfileId
+		print ("Successfully updated customer with customer profile id %s" % updateCustomerProfile.profile.customerProfileId)
 	else:
-		print response.messages.message[0].text
-		print "Failed to update customer profile with customer profile id %s" % updateCustomerProfile.profile.customerProfileId
+		print (response.messages.message[0]['text'].text)
+		print ("Failed to update customer profile with customer profile id %s" % updateCustomerProfile.profile.customerProfileId)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	update_customer_profile(constants.customerProfileId)

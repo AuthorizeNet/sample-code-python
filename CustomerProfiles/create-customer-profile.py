@@ -23,11 +23,11 @@ def create_customer_profile():
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Successfully created a customer profile with id: %s" % response.customerProfileId
+		print("Successfully created a customer profile with id: %s" % response.customerProfileId)
 	else:
-		print "Failed to create customer payment profile %s" % response.messages.message[0].text
+		print("Failed to create customer payment profile %s" % response.messages.message[0]['text'].text)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	create_customer_profile()

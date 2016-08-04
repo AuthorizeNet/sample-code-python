@@ -37,13 +37,13 @@ def get_batch_statistics():
 				print('Decline Count : %s' % statistic.declineCount)
 
 			if batchStatisticsResponse.messages:
-				print('Message Code : %s' % batchStatisticsResponse.messages.message[0].code)
-				print('Message Text : %s' % batchStatisticsResponse.messages.message[0].text)
+				print('Message Code : %s' % batchStatisticsResponse.messages.message[0]['code'].text)
+				print('Message Text : %s' % batchStatisticsResponse.messages.message[0]['text'].text)
 		else:
 			if batchStatisticsResponse.messages:
-				print('Failed to get batch statistics.\nCode:%s \nText:%s' % (batchStatisticsResponse.messages.message[0].code,batchStatisticsResponse.messages.message[0].text))
+				print('Failed to get batch statistics.\nCode:%s \nText:%s' % (batchStatisticsResponse.messages.message[0]['code'].text,batchStatisticsResponse.messages.message[0]['text'].text))
 
 	return batchStatisticsResponse
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	get_batch_statistics()

@@ -30,12 +30,12 @@ def capture_previously_authorized_amount():
 	response = createtransactioncontroller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-	    print "Transaction ID : %s" % response.transactionResponse.transId
-	    print response.transactionResponse.messages.message[0].description
+	    print ("Transaction ID : %s" % response.transactionResponse.transId)
+	    print (response.transactionResponse.messages.message[0].description)
 	else:
-	    print "response code: %s" % response.messages.resultCode
+	    print ("response code: %s" % response.messages.resultCode)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	capture_previously_auhtorized_amount()

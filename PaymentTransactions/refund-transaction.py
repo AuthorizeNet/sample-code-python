@@ -37,15 +37,15 @@ def refund_transaction(refTransId):
 	response = createtransactioncontroller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-	    print "Transaction ID : %s" % response.transactionResponse.transId
+	    print ("Transaction ID : %s" % response.transactionResponse.transId)
 	else:
-	    print "response code: %s" % response.messages.resultCode
-	    print "Message code: %s" % response.messages.message[0].code
-	    print "Message text: %s" % response.messages.message[0].text
-	    print "Transaction Error Code: %s" % response.transactionResponse.errors.error[0].errorCode
-	    print "Transaction Error Text: %s" % response.transactionResponse.errors.error[0].errorText
+	    print ("response code: %s" % response.messages.resultCode)
+	    print ("Message code: %s" % response.messages.message[0]['code'].text)
+	    print ("Message text: %s" % response.messages.message[0]['text'].text)
+	    print ("Transaction Error Code: %s" % response.transactionResponse.errors.error[0].errorCode)
+	    print ("Transaction Error Text: %s" % response.transactionResponse.errors.error[0].errorText)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	refund_transaction(constants.transactionId)

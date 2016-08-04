@@ -22,11 +22,11 @@ def get_subscription(subscriptionId):
 	response = getSubscriptionController.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Subscription Name : %s" % response.subscription.name
+		print ("Subscription Name : %s" % response.subscription.name)
 	else:
-		print "response code: %s" % response.messages.resultCode
+		print ("response code: %s" % response.messages.resultCode)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	get_subscription(constants.subscriptionId)

@@ -28,13 +28,13 @@ def void_transaction(refTransId):
 	response = createtransactioncontroller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-	    print "Transaction ID : %s" % response.transactionResponse.transId
-	    print response.transactionResponse.messages.message[0].description
+	    print ("Transaction ID : %s" % response.transactionResponse.transId)
+	    print (response.transactionResponse.messages.message[0].description)
 	else:
-	    print "response code: %s" % response.messages.resultCode
-	    print response.transactionResponse.errors.error[0].errorText
+	    print ("response code: %s" % response.messages.resultCode)
+	    print (response.transactionResponse.errors.error[0].errorText)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	void_transaction(constants.transactionId)

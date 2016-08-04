@@ -26,12 +26,12 @@ def update_split_tender_group():
 
 
 	if (response.messages.resultCode=="Ok"):
-	    print response.messages.message[0].text
+	    print (response.messages.message[0]['text'].text)
 	else:
-	    print "response code: %s" % response.messages.resultCode
-	    print response.messages.message[0].text
+	    print ("response code: %s" % response.messages.resultCode)
+	    print (response.messages.message[0]['text'].text)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	update_split_tender_group()

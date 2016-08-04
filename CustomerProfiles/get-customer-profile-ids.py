@@ -19,13 +19,13 @@ def get_customer_profile_ids():
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Successfully retrieved customer ids:"
+		print("Successfully retrieved customer ids:")
 		for identity in response.ids.numericString:
-			print identity
+			print(identity)
 	else:
-		print "response code: %s" % response.messages.resultCode
+		print("response code: %s" % response.messages.resultCode)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	get_customer_profile_ids()

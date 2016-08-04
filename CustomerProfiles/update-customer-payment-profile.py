@@ -42,12 +42,12 @@ def update_customer_payment_profile(customerProfileId, customerPaymentProfileId)
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Successfully updated customer payment profile with id %s" % updateCustomerPaymentProfile.paymentProfile.customerPaymentProfileId
+		print ("Successfully updated customer payment profile with id %s" % updateCustomerPaymentProfile.paymentProfile.customerPaymentProfileId)
 	else:
-		print response.messages.message[0].text
-		print "Failed to update customer with customer payment profile id %s" % updateCustomerPaymentProfile.paymentProfile.customerPaymentProfileId
+		print (response.messages.message[0]['text'].text)
+		print ("Failed to update customer with customer payment profile id %s" % updateCustomerPaymentProfile.paymentProfile.customerPaymentProfileId)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	update_customer_payment_profile(constants.customerProfileId, constants.customerPaymentProfileId)

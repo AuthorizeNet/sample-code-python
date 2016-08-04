@@ -40,13 +40,13 @@ def credit_bank_account():
 	response = createtransactioncontroller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-	    print "Transaction ID : %s" % response.transactionResponse.transId
-	    print response.transactionResponse.messages.message[0].description
+	    print ("Transaction ID : %s" % response.transactionResponse.transId)
+	    print (response.transactionResponse.messages.message[0].description)
 	else:
-	    print "response code: %s" % response.messages.resultCode
-	    print response.messages.message[0].text
+	    print ("response code: %s" % response.messages.resultCode)
+	    print (response.messages.message[0]['text'].text)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	credit_bank_account()

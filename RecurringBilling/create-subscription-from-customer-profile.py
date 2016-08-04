@@ -21,13 +21,13 @@ def create_subscription_from_customer_profile(amount, days, profileId, paymentPr
 	paymentschedule.startDate = datetime(2020, 8, 30)
 	paymentschedule.totalOccurrences = 12
 	paymentschedule.trialOccurrences = 1
-	
+
 	#setting the customer profile details
 	profile = apicontractsv1.customerProfileIdType()
 	profile.customerProfileId = profileId
 	profile.customerPaymentProfileId = paymentProfileId
 	profile.customerAddressId = customerAddressId
-	
+
 	# Setting subscription details
 	subscription = apicontractsv1.ARBSubscriptionType()
 	subscription.name = "Sample Subscription"
@@ -35,12 +35,12 @@ def create_subscription_from_customer_profile(amount, days, profileId, paymentPr
 	subscription.amount = amount
 	subscription.trialAmount = Decimal('0.00')
 	subscription.profile = profile
-	
+
 	# Creating the request
 	request = apicontractsv1.ARBCreateSubscriptionRequest()
 	request.merchantAuthentication = merchantAuth
 	request.subscription = subscription
-	
+
 	# Creating and executing the controller
 	controller = ARBCreateSubscriptionController(request)
 	controller.execute()
@@ -48,16 +48,16 @@ def create_subscription_from_customer_profile(amount, days, profileId, paymentPr
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "SUCCESS:"
-		print "Message Code : %s" % response.messages.message[0].code
-		print "Message text : %s" % response.messages.message[0].text
-		print "Subscription ID : %s" % response.subscriptionId
+		print ("SUCCESS:")
+		print ("Message Code : %s" % response.messages.message[0]['code'].text)
+		print ("Message text : %s" % response.messages.message[0]['text'].text)
+		print ("Subscription ID : %s" % response.subscriptionId)
 	else:
-		print "ERROR:" 
-		print "Message Code : %s" % response.messages.message[0].code
-		print "Message text : %s" % response.messages.message[0].text
+		print ("ERROR:")
+		print ("Message Code : %s" % response.messages.message[0]['code'].text)
+		print ("Message text : %s" % response.messages.message[0]['text'].text)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	create_subscription_from_customer_profile(constants.amount, constants.days, "247150", "215472", "189691")

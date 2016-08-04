@@ -35,11 +35,11 @@ def charge_credit_card(amount):
 	response = createtransactioncontroller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Transaction ID : %s" % response.transactionResponse.transId
+		print("Transaction ID : %s" % response.transactionResponse.transId)
 	else:
-		print "response code: %s" % response.messages.resultCode
+		print("response code: %s" % response.messages.resultCode)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	charge_credit_card(constants.amount)
