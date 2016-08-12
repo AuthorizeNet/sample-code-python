@@ -35,15 +35,15 @@ def update_customer_shipping_address(customerProfileId, customerAddressId):
 	response = updateShippingAddressController.getresponse()
 
 	if response.messages.resultCode == "Ok":
-	    print "SUCCESS"
-	    print "Message code : %s " % response.messages.message[0].code
-	    print "Message text : %s " % response.messages.message[0].text
+	    print ("SUCCESS")
+	    print ("Message code : %s " % response.messages.message[0]['code'].text)
+	    print ("Message text : %s " % response.messages.message[0]['text'].text)
 	else:
-	    print "ERROR"
-	    print "Message code : %s " % response.messages.message[0].code
-	    print "Message text : %s " % response.messages.message[0].text
+	    print ("ERROR")
+	    print ("Message code : %s " % response.messages.message[0]['code'].text)
+	    print ("Message text : %s " % response.messages.message[0]['text'].text)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	update_customer_shipping_address(constants.customerProfileId, constants.customerProfileShippingId)

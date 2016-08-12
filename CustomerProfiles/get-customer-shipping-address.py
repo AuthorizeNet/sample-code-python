@@ -23,29 +23,29 @@ def get_customer_shipping_address(customerProfileId, customerAddressId):
     response = getShippingAddressController.getresponse()
 
     if response.messages.resultCode == "Ok":
-        print "SUCCESS"
+        print ("SUCCESS")
         if hasattr(response, 'address') == True:
-            print "The address is"
-            print response.address.firstName +" " + response.address.lastName
-            print response.address.address
-            print response.address.city
-            print response.address.state
-            print response.address.zip
-            print response.address.country
+            print ("The address is")
+            print (response.address.firstName +" " + response.address.lastName)
+            print (response.address.address)
+            print (response.address.city)
+            print (response.address.state)
+            print (response.address.zip)
+            print (response.address.country)
         if not hasattr(response, 'subscriptionIds'):
             print ("no subscriptionIds attr in response")
-        else:  
+        else:
             if hasattr(response, 'subscriptionIds') == True:
                 if hasattr(response.subscriptionIds, 'subscriptionId') == True:
-                    print "list of subscriptionid:"
+                    print ("list of subscriptionid:"
                     for subscriptionid in (response.subscriptionIds.subscriptionId):
-                        print subscriptionid
+                        print (subscriptionid)
     else:
-        print "ERROR"
-        print "Message code : %s " % response.messages.message[0].code
-        print "Message text : %s " % response.messages.message[0].text
+        print ("ERROR")
+        print ("Message code : %s " % response.messages.message[0]['code'].text)
+        print ("Message text : %s " % response.messages.message[0]['text'].text)
 
     return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
     get_customer_shipping_address(constants.customerProfileId, constants.customerProfileShippingId)

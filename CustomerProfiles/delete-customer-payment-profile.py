@@ -21,12 +21,12 @@ def delete_customer_payment_profile(customerProfileId, customerPaymentProfileId)
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Successfully deleted customer payment profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
+		print("Successfully deleted customer payment profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId)
 	else:
-		print response.messages.message[0].text
-		print "Failed to delete customer paymnet profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId
+		print(response.messages.message[0]['text'].text)
+		print("Failed to delete customer paymnet profile with customer profile id %s" % deleteCustomerPaymentProfile.customerProfileId)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	delete_customer_payment_profile(constants.customerProfileId, constants.customerPaymentProfileId)

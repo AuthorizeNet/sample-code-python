@@ -24,24 +24,24 @@ def get_customer_profile(customerProfileId):
 			if hasattr(response.profile, 'paymentProfiles') == True:
 				for paymentProfile in response.profile.paymentProfiles:
 		 			print ("paymentProfile in get_customerprofile is:" %paymentProfile)
-		 			print "Payment Profile ID %s" % str(paymentProfile.customerPaymentProfileId)
+		 			print ("Payment Profile ID %s" % str(paymentProfile.customerPaymentProfileId))
 		 	if hasattr(response.profile, 'shipToList') == True:
 			 	for ship in response.profile.shipToList:
-		 			print "Shipping Details:"
-		 			print "First Name %s" % ship.firstName
-		 			print "Last Name %s" % ship.lastName
-		 			print "Address %s" % ship.address
-		 			print "Customer Address ID %s" % ship.customerAddressId
+		 			print ("Shipping Details:")
+		 			print ("First Name %s" % ship.firstName)
+		 			print ("Last Name %s" % ship.lastName)
+		 			print ("Address %s" % ship.address
+		 			print ("Customer Address ID %s" % ship.customerAddressId)
 		if hasattr(response, 'subscriptionIds') == True:
 			if hasattr(response.subscriptionIds, 'subscriptionId') == True:
-				print "list of subscriptionid:"
+				print ("list of subscriptionid:")
 	 			for subscriptionid in (response.subscriptionIds.subscriptionId):
-					print subscriptionid
+					print (subscriptionid)
 	else:
-		print "response code: %s" % response.messages.resultCode
-		print "Failed to get customer profile information with id %s" % getCustomerProfile.customerProfileId
+		print ("response code: %s" % response.messages.resultCode)
+		print ("Failed to get customer profile information with id %s" % getCustomerProfile.customerProfileId)
  
 	return response
  
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	get_customer_profile(constants.customerProfileId)

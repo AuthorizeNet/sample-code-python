@@ -31,13 +31,13 @@ def get_unsettled_transaction_list():
 				print('Settle Amount : %s' % transaction.settleAmount)
 
 			if unsettledTransactionListResponse.messages:
-				print('Message Code : %s' % unsettledTransactionListResponse.messages.message[0].code)
-				print('Message Text : %s' % unsettledTransactionListResponse.messages.message[0].text)
+				print('Message Code : %s' % unsettledTransactionListResponse.messages.message[0]['code'].text)
+				print('Message Text : %s' % unsettledTransactionListResponse.messages.message[0]['text'].text)
 		else:
 			if unsettledTransactionListResponse.messages:
-				print('Failed to get unsettled transaction list.\nCode:%s \nText:%s' % (unsettledTransactionListResponse.messages.message[0].code,unsettledTransactionListResponse.messages.message[0].text))
+				print('Failed to get unsettled transaction list.\nCode:%s \nText:%s' % (unsettledTransactionListResponse.messages.message[0]['code'].text,unsettledTransactionListResponse.messages.message[0]['text'].text))
 
 	return unsettledTransactionListResponse
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	get_unsettled_transaction_list()

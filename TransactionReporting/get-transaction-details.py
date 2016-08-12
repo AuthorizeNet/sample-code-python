@@ -34,13 +34,13 @@ def get_transaction_details(transId):
 				print('Tax : %s' % transactionDetailsResponse.transaction.tax.amount)
 
 			if transactionDetailsResponse.messages:
-				print('Message Code : %s' % transactionDetailsResponse.messages.message[0].code)
-				print('Message Text : %s' % transactionDetailsResponse.messages.message[0].text)
+				print('Message Code : %s' % transactionDetailsResponse.messages.message[0]['code'].text)
+				print('Message Text : %s' % transactionDetailsResponse.messages.message[0]['text'].text)
 		else:
 			if transactionDetailsResponse.messages:
-				print('Failed to get transaction details.\nCode:%s \nText:%s' % (transactionDetailsResponse.messages.message[0].code,transactionDetailsResponse.messages.message[0].text))
+				print('Failed to get transaction details.\nCode:%s \nText:%s' % (transactionDetailsResponse.messages.message[0]['code'].text,transactionDetailsResponse.messages.message[0]['text'].text))
 
 	return transactionDetailsResponse
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	get_transaction_details(constants.transactionId)

@@ -20,12 +20,12 @@ def delete_customer_profile(customerProfileId):
 	response = controller.getresponse()
 
 	if (response.messages.resultCode=="Ok"):
-		print "Successfully deleted customer with customer profile id %s" % deleteCustomerProfile.customerProfileId
+		print("Successfully deleted customer with customer profile id %s" % deleteCustomerProfile.customerProfileId)
 	else:
-		print response.messages.message[0].text
-		print "Failed to delete customer profile with customer profile id %s" % deleteCustomerProfile.customerProfileId
+		print(response.messages.message[0]['text'].text)
+		print("Failed to delete customer profile with customer profile id %s" % deleteCustomerProfile.customerProfileId)
 
 	return response
 
-if(os.path.basename(__file__) == sys.argv[0].split('/')[-1]):
+if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
 	delete_customer_profile(constants.customerProfileId)

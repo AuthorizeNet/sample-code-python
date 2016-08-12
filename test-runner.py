@@ -235,7 +235,7 @@ class TestRunner(unittest.TestCase):
 			
 			#delete newly create customer profile
 			modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
-		 	modl.delete_customer_profile(customerProfileId)
+			modl.delete_customer_profile(customerProfileId)
 
 		return response
 
@@ -582,33 +582,36 @@ class TestRunner(unittest.TestCase):
 	def test_all_sample_codes(self):
 		failed = []
 		succeeded = [] 
-		f = open('list_of_sample_codes.txt', 'r')
-		numRetries = 3;
-		for line in f:
-			#print(line)
-			items = line.split('\t')
-			apiName = items[0]
-			isDependent = items[1]
-			shouldApiRun = items[2].rstrip()[0]		
+		with open('list_of_sample_codes.txt', 'r') as f:
+			numRetries = 3;
+			for line in f:
+				#print(line)
+				items = line.split('\t')
+				apiName = items[0]
+				isDependent = items[1]
+				shouldApiRun = items[2].rstrip()[0]		
 
-			if(shouldApiRun == '0'):
-				continue
-				
-			if(shouldApiRun == '1'):
-				for i in range(0, numRetries):
-
-					print "-------------------------------"
-					print "Running : " + apiName
-					print "-------------------------------"
-					response = getattr(self, apiName)()
-					#if(self.validate_response(response)):
-					#	succeeded.append(apiName)
-					#else:
-					#	failed.append(apiName)
+				if(shouldApiRun == '0'):
+					continue
 					
-					if self.validate_response(response) == True:
-						break;
-				self.assertTrue(self.validate_response(response))
+				if(shouldApiRun == '1'):
+					for i in range(0, numRetries):
+						try:
+							print("-------------------------------")
+							print("Running : " + apiName)
+							print("-------------------------------")
+							response = getattr(self, apiName)()
+							#if(self.validate_response(response)):
+							#	succeeded.append(apiName)
+							#else:
+							#	failed.append(apiName)
+							
+							if self.validate_response(response) == True:
+								break;
+						except BaseException as e:
+							print(str(e))
+
+					self.assertTrue(self.validate_response(response))
 
 		#print("-------- Success ----------")
 		#for line in succeeded:
