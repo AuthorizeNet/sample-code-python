@@ -20,8 +20,18 @@ class TestRunner(unittest.TestCase):
 
 	def create_an_apple_pay_transaction(self):
 		print("create_an_apple_pay_transaction")
-		modl = imp.load_source('modulename', 'ApplePayTransactions/create-an-apple-pay-transaction.py')
+		modl = imp.load_source('modulename', 'MobileInAppTransactions/create-an-apple-pay-transaction.py')
 		return modl.create_an_apple_pay_transaction()
+
+	def create_an_accept_transaction(self):
+		print("create_an_accept_transaction")
+		modl = imp.load_source('modulename', 'MobileInAppTransactions/create-an-accept-transaction.py')
+		return modl.create_an_accept_transaction()
+
+	def create_an_android_pay_transaction(self):
+		print("create_an_android_pay_transaction")
+		modl = imp.load_source('modulename', 'MobileInAppTransactions/create-an-android-pay-transaction.py')
+		return modl.create_an_android_pay_transaction()
 
 	def create_customer_payment_profile(self):
 		print("create_customer_payment_profile")
