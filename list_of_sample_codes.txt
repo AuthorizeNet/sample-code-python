@@ -1,5 +1,7 @@
 ﻿SampleCode	IsDependent	RunApi
 create_an_apple_pay_transaction	1	0
+create_an_accept_transaction	1	0
+create_an_android_pay_transaction	1	0
 create_customer_payment_profile	1	1
 create_customer_profile_from_transaction	1	1
 create_customer_profile	1	1
