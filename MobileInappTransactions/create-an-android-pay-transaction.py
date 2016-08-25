@@ -34,16 +34,27 @@ def create_an_android_pay_transaction():
 
 	response = controller.getresponse()
 
-	if (response.messages.resultCode=="Ok"):
-	    print("SUCCESS")
-	    print("Message Code : %s" % response.messages.message[0]['code'].text)
-	    print("Message text : %s" % response.messages.message[0]['text'].text)
-	    print("AUTH Code : %s" % response.authCode)
-	    print("Transaction ID : %s" % response.transId)
+	if response is not None:
+		if response.messages.resultCode == "Ok":
+			if response.transactionResponse.responseCode == 1:
+				print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId);
+				print ('Description: %s' % response.transactionResponse.messages.message[0].description);
+				print ('AUTH Code : %s' % response.authCode)
+			else:
+				print ('Failed Transaction.');
+				if hasattr(response.transactionResponse, 'errors') == True:
+					print ('Error Code:  %s' % str(response.transactionResponse.errors.error[0].errorCode));
+					print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+		else:
+			print ('Failed Transaction.');
+			if hasattr(response, 'transactionResponse') == True and hasattr(response.transactionResponse, 'errors') == True:
+				print ('Error Code: %s' % str(response.transactionResponse.errors.error[0].errorCode));
+				print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+			else:
+				print ('Error Code: %s' % response.messages.message[0]['code'].text);
+				print ('Error message: %s' % response.messages.message[0]['text'].text);
 	else:
-	    print("ERROR")
-	    print("Message Code : %s" % response.messages.message[0]['code'].text)
-	    print("Message text : %s" % response.messages.message[0]['text'].text)
+		print ('Null Response.');
 
 	return response
 

@@ -36,14 +36,26 @@ def refund_transaction(refTransId):
 
 	response = createtransactioncontroller.getresponse()
 
-	if (response.messages.resultCode=="Ok"):
-	    print ("Transaction ID : %s" % response.transactionResponse.transId)
+	if response is not None:
+		if response.messages.resultCode == "Ok":
+			if response.transactionResponse.responseCode == 1:
+				print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId);
+				print ('Description: %s' % response.transactionResponse.messages.message[0].description);
+			else:
+				print ('Failed Transaction.');
+				if hasattr(response.transactionResponse, 'errors') == True:
+					print ('Error Code:  %s' % str(response.transactionResponse.errors.error[0].errorCode));
+					print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+		else:
+			print ('Failed Transaction.');
+			if hasattr(response, 'transactionResponse') == True and hasattr(response.transactionResponse, 'errors') == True:
+				print ('Error Code: %s' % str(response.transactionResponse.errors.error[0].errorCode));
+				print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+			else:
+				print ('Error Code: %s' % response.messages.message[0]['code'].text);
+				print ('Error message: %s' % response.messages.message[0]['text'].text);
 	else:
-	    print ("response code: %s" % response.messages.resultCode)
-	    print ("Message code: %s" % response.messages.message[0]['code'].text)
-	    print ("Message text: %s" % response.messages.message[0]['text'].text)
-	    print ("Transaction Error Code: %s" % response.transactionResponse.errors.error[0].errorCode)
-	    print ("Transaction Error Text: %s" % response.transactionResponse.errors.error[0].errorText)
+		print ('Null Response.');
 
 	return response
 
