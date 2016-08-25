@@ -27,7 +27,7 @@ def get_details(refTransId):
 
 	if response is not None:
     	if response.messages.resultCode == "Ok":
-            if response.transactionResponse.responseCode == 1:
+            if hasattr(response.transactionResponse, 'messages') == True:
             	print ("Paypal Get Details Successful.")
                 print ('Transaction ID: %s' % response.transactionResponse.transId);
                 print ("Payer Id : %s " % response.transactionResponse.secureAcceptance.PayerID)

@@ -36,7 +36,7 @@ def create_an_apple_pay_transaction():
 
 	if response is not None:
 		if response.messages.resultCode == "Ok":
-			if response.transactionResponse.responseCode == 1:
+			if hasattr(response.transactionResponse, 'messages') == True:
 				print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId);
 				print ('Description: %s' % response.transactionResponse.messages.message[0].description);
 				print ('AUTH Code : %s' % response.authCode)
