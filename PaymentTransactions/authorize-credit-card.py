@@ -8,6 +8,7 @@ constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def authorize_credit_card():
+
 	amount = str(round(random.random()*100, 2)) 
 
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
