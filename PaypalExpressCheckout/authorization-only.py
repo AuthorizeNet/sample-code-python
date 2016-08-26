@@ -37,7 +37,9 @@ def authorization_only():
     	if response.messages.resultCode == "Ok":
             if hasattr(response.transactionResponse, 'messages') == True:
                 print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId);
-                print ("Secure acceptance URL : %s " % response.transactionResponse.secureAcceptance.SecureAcceptanceUrl)
+                print ("Secure acceptance URL : %s " % response.transactionResponse.secureAcceptance.SecureAcceptanceUrl);
+                print ('Transaction Response Code: %s' % response.transactionResponse.responseCode);
+                print ('Message Code: %s' % response.transactionResponse.messages.message[0].code);
                 print ('Description: %s' % response.transactionResponse.messages.message[0].description);
             else:
                 print ('Failed Transaction.');

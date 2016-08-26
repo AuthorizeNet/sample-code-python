@@ -30,7 +30,9 @@ def get_details(refTransId):
             if hasattr(response.transactionResponse, 'messages') == True:
             	print ("Paypal Get Details Successful.")
                 print ('Transaction ID: %s' % response.transactionResponse.transId);
-                print ("Payer Id : %s " % response.transactionResponse.secureAcceptance.PayerID)
+                print ("Payer Id : %s " % response.transactionResponse.secureAcceptance.PayerID);
+                print ('Transaction Response Code: %s' % response.transactionResponse.responseCode);
+                print ('Message Code: %s' % response.transactionResponse.messages.message[0].code);
             else:
                 print ('Failed Transaction.');
                 if hasattr(response.transactionResponse, 'errors') == True:
