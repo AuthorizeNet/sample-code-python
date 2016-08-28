@@ -25,17 +25,29 @@ def get_details(refTransId):
 
 	response = controller.getresponse()
 
-	if (response.messages.resultCode=="Ok"):
-	    print ("SUCCESS")
-	    print ("Message Code : %s" % response.messages.message[0]['code'].text)
-	    print ("Message text : %s" % response.messages.message[0]['text'].text)
-	    if (response.transactionResponse.responseCode == "1" ):
-	        print ("Payer Id : %s " % response.transactionResponse.secureAcceptance.PayerID)
-	        print ("Transaction ID : %s " % response.transactionResponse.transId)
+	if response is not None:
+		if response.messages.resultCode == "Ok":
+			if hasattr(response.transactionResponse, 'messages') == True:
+				print ("Paypal Get Details Successful.")
+				print ('Transaction ID: %s' % response.transactionResponse.transId);
+				print ("Payer Id : %s " % response.transactionResponse.secureAcceptance.PayerID);
+				print ('Transaction Response Code: %s' % response.transactionResponse.responseCode);
+				print ('Message Code: %s' % response.transactionResponse.messages.message[0].code);
+			else:
+				print ('Failed Transaction.');
+				if hasattr(response.transactionResponse, 'errors') == True:
+					print ('Error Code:  %s' % str(response.transactionResponse.errors.error[0].errorCode));
+					print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+		else:
+			print ('Failed Transaction.');
+			if hasattr(response, 'transactionResponse') == True and hasattr(response.transactionResponse, 'errors') == True:
+				print ('Error Code: %s' % str(response.transactionResponse.errors.error[0].errorCode));
+				print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+			else:
+				print ('Error Code: %s' % response.messages.message[0]['code'].text);
+				print ('Error message: %s' % response.messages.message[0]['text'].text);
 	else:
-	    print ("ERROR")
-	    print ("Message Code : %s" % response.messages.message[0]['code'].text)
-	    print ("Message text : %s" % response.messages.message[0]['text'].text)
+		print ('Null Response.');
 
 	return response
 
