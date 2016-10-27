@@ -34,7 +34,7 @@ get_details	1	0
 prior_authorization_capture	1	0
 get_customer_shipping_address	1	0
 get_customer_profile	1	0
-get_hosted_profile_page	1	0
+get_accept_customer_profile_page	1	0
 void	1	0
 cancel_subscription	1	0
 create_subscription	1	1
