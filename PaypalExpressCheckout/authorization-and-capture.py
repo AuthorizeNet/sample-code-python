@@ -6,38 +6,38 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def charge_credit_card(amount):
+def authorization_and_capture(amount):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
 
-	creditCard = apicontractsv1.creditCardType()
-	creditCard.cardNumber = "4111111111111111"
-	creditCard.expirationDate = "2020-12"
+	paypal = apicontractsv1.payPalType()
+	paypal.successUrl = "http://www.merchanteCommerceSite.com/Success/TC25262"
+	paypal.cancelUrl = "http://www.merchanteCommerceSite.com/Success/TC25262"
 
 	payment = apicontractsv1.paymentType()
-	payment.creditCard = creditCard
+	payment.payPal = paypal
 
 	transactionrequest = apicontractsv1.transactionRequestType()
-	transactionrequest.transactionType = "authCaptureTransaction"
 	transactionrequest.amount = amount
+	transactionrequest.transactionType = apicontractsv1.transactionTypeEnum.authCaptureTransaction
 	transactionrequest.payment = payment
 
+	request = apicontractsv1.createTransactionRequest()
+	request.merchantAuthentication = merchantAuth
+	request.refId = "Sample"
+	request.transactionRequest = transactionrequest
 
-	createtransactionrequest = apicontractsv1.createTransactionRequest()
-	createtransactionrequest.merchantAuthentication = merchantAuth
-	createtransactionrequest.refId = "MerchantID-0001"
+	controller = createTransactionController(request)
+	controller.execute()
 
-	createtransactionrequest.transactionRequest = transactionrequest
-	createtransactioncontroller = createTransactionController(createtransactionrequest)
-	createtransactioncontroller.execute()
-
-	response = createtransactioncontroller.getresponse()
+	response = controller.getresponse()
 
 	if response is not None:
 		if response.messages.resultCode == "Ok":
 			if hasattr(response.transactionResponse, 'messages') == True:
 				print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId);
+				print ("Secure acceptance URL : %s " % response.transactionResponse.secureAcceptance.SecureAcceptanceUrl);
 				print ('Transaction Response Code: %s' % response.transactionResponse.responseCode);
 				print ('Message Code: %s' % response.transactionResponse.messages.message[0].code);
 				print ('Description: %s' % response.transactionResponse.messages.message[0].description);
@@ -60,4 +60,4 @@ def charge_credit_card(amount):
 	return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	charge_credit_card(constants.amount)
+	authorization_and_capture(constants.amount)

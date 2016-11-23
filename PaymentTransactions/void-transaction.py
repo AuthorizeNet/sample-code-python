@@ -6,23 +6,16 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def charge_credit_card(amount):
+def void_transaction(refTransId):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
 
-	creditCard = apicontractsv1.creditCardType()
-	creditCard.cardNumber = "4111111111111111"
-	creditCard.expirationDate = "2020-12"
-
-	payment = apicontractsv1.paymentType()
-	payment.creditCard = creditCard
 
 	transactionrequest = apicontractsv1.transactionRequestType()
-	transactionrequest.transactionType = "authCaptureTransaction"
-	transactionrequest.amount = amount
-	transactionrequest.payment = payment
-
+	transactionrequest.transactionType = "voidTransaction"
+	#set refTransId to transId of an unsettled transaction
+	transactionrequest.refTransId = refTransId
 
 	createtransactionrequest = apicontractsv1.createTransactionRequest()
 	createtransactionrequest.merchantAuthentication = merchantAuth
@@ -60,4 +53,4 @@ def charge_credit_card(amount):
 	return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	charge_credit_card(constants.amount)
+	void_transaction(constants.transactionId)

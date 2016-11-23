@@ -6,22 +6,17 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def charge_credit_card(amount):
+def capture_previously_authorized_amount():
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
 
-	creditCard = apicontractsv1.creditCardType()
-	creditCard.cardNumber = "4111111111111111"
-	creditCard.expirationDate = "2020-12"
-
-	payment = apicontractsv1.paymentType()
-	payment.creditCard = creditCard
 
 	transactionrequest = apicontractsv1.transactionRequestType()
-	transactionrequest.transactionType = "authCaptureTransaction"
-	transactionrequest.amount = amount
-	transactionrequest.payment = payment
+	transactionrequest.transactionType = "priorAuthCaptureTransaction"
+	transactionrequest.amount = Decimal ('2.55')
+	transactionrequest.refTransId = "2245440574"
+
 
 
 	createtransactionrequest = apicontractsv1.createTransactionRequest()
@@ -60,4 +55,4 @@ def charge_credit_card(amount):
 	return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	charge_credit_card(constants.amount)
+	capture_previously_auhtorized_amount()

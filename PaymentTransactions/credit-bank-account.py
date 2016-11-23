@@ -5,23 +5,28 @@ from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
+from authorizenet.apicontractsv1 import bankAccountType, accountTypeEnum
 
-def charge_credit_card(amount):
+def credit_bank_account():
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
 
-	creditCard = apicontractsv1.creditCardType()
-	creditCard.cardNumber = "4111111111111111"
-	creditCard.expirationDate = "2020-12"
 
 	payment = apicontractsv1.paymentType()
-	payment.creditCard = creditCard
+
+	bankAccountType = apicontractsv1.bankAccountType()
+	accountType = apicontractsv1.bankAccountTypeEnum
+	bankAccountType.accountType = accountType.checking
+	bankAccountType.routingNumber = "125000024"
+	bankAccountType.accountNumber = "12345678"
+	bankAccountType.nameOnAccount = "John Doe"
 
 	transactionrequest = apicontractsv1.transactionRequestType()
-	transactionrequest.transactionType = "authCaptureTransaction"
-	transactionrequest.amount = amount
+	transactionrequest.transactionType = "refundTransaction"
+	transactionrequest.amount = Decimal ('2.55')
 	transactionrequest.payment = payment
+	transactionrequest.payment.bankAccount = bankAccountType
 
 
 	createtransactionrequest = apicontractsv1.createTransactionRequest()
@@ -60,4 +65,4 @@ def charge_credit_card(amount):
 	return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	charge_credit_card(constants.amount)
+	credit_bank_account()
