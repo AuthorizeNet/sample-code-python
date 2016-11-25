@@ -580,6 +580,21 @@ class TestRunner(unittest.TestCase):
 		modl = imp.load_source('modulename', 'VisaCheckout/decrypt-visa-checkout-data.py')
 		return modl.decrypt_visa_checkout_data()
 
+	def get_merchant_details(self):
+		print("get_merchant_details")
+		modl = imp.load_source('modulename', 'TransactionReporting/get-merchant-details.py')
+		return modl.get_merchant_details()
+
+	def get_hosted_payment_page(self):
+		print("get_hosted_payment_page")
+		modl = imp.load_source('modulename', 'PaymentTransactions/get-hosted-payment-page.py')
+		return modl.get_hosted_payment_page(self.getAmount())
+
+	def update_held_transaction(self):
+		print("update_held_transaction")
+		modl = imp.load_source('modulename', 'PaymentTransactions/update-held-transaction.py')
+		return modl.update_held_transaction("12345")
+
 	def validate_response(self, response):
 		if(response is None):
 			return False

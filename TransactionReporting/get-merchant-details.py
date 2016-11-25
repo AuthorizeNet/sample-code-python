@@ -22,15 +22,15 @@ def get_merchant_details():
 
 	if response is not None:
 		if response.messages.resultCode == "Ok":
-			print "Merchant Name: ", response.merchantName
-			print "Gateway ID: ", response.gatewayId
-			print "Processors: ",
+			print("Merchant Name: ", response.merchantName)
+			print("Gateway ID: ", response.gatewayId)
+			print("Processors: "),
 			for processor in response.processors.processor:
-				print processor.name, "; ",
+				print(processor.name, "; "),
 		else:
-			print "Failed Transaction."
+			print ("Failed Transaction.")
 	else:
-		print "Null Response."
+		print ("Null Response.")
 
 	return response
 
