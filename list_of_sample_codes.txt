@@ -51,3 +51,4 @@ get_unsettled_transaction_list	1	0
 create_visa_checkout_transaction	1	0
 decrypt_visa_checkout_data	1	0
 get_customer_profile_ids	1	1
+get_merchant_details	0	1
