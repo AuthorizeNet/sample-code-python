@@ -53,4 +53,4 @@ decrypt_visa_checkout_data	1	0
 get_customer_profile_ids	1	1
 get_merchant_details	0	1
 update_held_transaction	0	0
-get_hosted_payment_page	0	1
+get_an_accept_payment_page	0	1
