@@ -585,10 +585,10 @@ class TestRunner(unittest.TestCase):
 		modl = imp.load_source('modulename', 'TransactionReporting/get-merchant-details.py')
 		return modl.get_merchant_details()
 
-	def get_hosted_payment_page(self):
-		print("get_hosted_payment_page")
-		modl = imp.load_source('modulename', 'PaymentTransactions/get-hosted-payment-page.py')
-		return modl.get_hosted_payment_page(self.getAmount())
+	def get_an_accept_payment_page(self):
+		print("get_an_accept_payment_page")
+		modl = imp.load_source('modulename', 'PaymentTransactions/get-an-accept-payment-page.py')
+		return modl.get_an_accept_payment_page(self.getAmount())
 
 	def update_held_transaction(self):
 		print("update_held_transaction")
