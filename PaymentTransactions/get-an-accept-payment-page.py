@@ -6,7 +6,7 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def get_hosted_payment_page(amount):
+def get_an_accept_payment_page(amount):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
