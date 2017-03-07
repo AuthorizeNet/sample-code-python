@@ -37,7 +37,7 @@ def get_customer_shipping_address(customerProfileId, customerAddressId):
         else:
             if hasattr(response, 'subscriptionIds') == True:
                 if hasattr(response.subscriptionIds, 'subscriptionId') == True:
-                    print ("list of subscriptionid:"
+                    print ("list of subscriptionid:")
                     for subscriptionid in (response.subscriptionIds.subscriptionId):
                         print (subscriptionid)
     else:
