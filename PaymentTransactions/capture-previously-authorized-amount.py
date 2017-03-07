@@ -55,4 +55,4 @@ def capture_previously_authorized_amount():
 	return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	capture_previously_auhtorized_amount()
+	capture_previously_authorized_amount()
