@@ -23,7 +23,7 @@ charge_tokenized_credit_card	1	0
 credit_bank_account	1	0
 debit_bank_account	1	1
 refund_transaction	1	0
-update_split_tender_group	1	1
+update_split_tender_group	1	0
 void_transaction	1	0
 authorization_and_capture_continue	1	1
 authorization_and_capture	1	1

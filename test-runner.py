@@ -320,8 +320,12 @@ class TestRunner(unittest.TestCase):
 
 	def capture_previously_authorized_amount(self):
 		print("capture_previously_authorized_amount")
+		
+		modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
+		response = modl.authorize_credit_card()
+		
 		modl = imp.load_source('modulename', 'PaymentTransactions/capture-previously-authorized-amount.py')
-		return modl.capture_previously_authorized_amount()
+		return modl.capture_previously_authorized_amount(response.transactionResponse.transId)
 
 	def charge_credit_card(self):
 		print("charge_credit_card")
