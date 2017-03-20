@@ -14,6 +14,8 @@ def charge_tokenized_credit_card():
 	creditCard = apicontractsv1.creditCardType()
 	creditCard.cardNumber = "4111111111111111"
 	creditCard.expirationDate = "2020-12"
+	# Set the token specific info
+	creditCard.isPaymentToken = True
 	creditCard.cryptogram = "EjRWeJASNFZ4kBI0VniQEjRWeJA="
 
 	payment = apicontractsv1.paymentType()
