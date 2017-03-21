@@ -7,6 +7,7 @@ constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def charge_credit_card(amount):
+
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
