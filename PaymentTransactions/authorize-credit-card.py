@@ -1,15 +1,12 @@
 import os, sys
 import imp
-import random
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def authorize_credit_card():
-
-	amount = str(round(random.random()*100, 2)) 
+def authorize_credit_card(amount):
 
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
