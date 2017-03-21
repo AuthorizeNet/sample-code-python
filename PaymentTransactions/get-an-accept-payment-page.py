@@ -30,7 +30,7 @@ def get_an_accept_payment_page(amount):
 	paymentPageRequest = apicontractsv1.getHostedPaymentPageRequest()
 	paymentPageRequest.merchantAuthentication = merchantAuth
 	paymentPageRequest.transactionRequest = transactionrequest
-	paymentPageRequest.hostedProfileSettings = settings
+	paymentPageRequest.hostedPaymentSettings = settings
 
 	paymentPageController = getHostedPaymentPageController(paymentPageRequest)
 
