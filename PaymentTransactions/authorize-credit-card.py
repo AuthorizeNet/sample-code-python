@@ -21,7 +21,7 @@ def authorize_credit_card(amount):
 
 	transactionrequest = apicontractsv1.transactionRequestType()
 	transactionrequest.transactionType = "authOnlyTransaction"
-	transactionrequest.amount = Decimal (amount)
+	transactionrequest.amount = amount
 	transactionrequest.payment = payment
 
 
