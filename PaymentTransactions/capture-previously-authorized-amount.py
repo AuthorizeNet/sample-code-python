@@ -6,7 +6,7 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def capture_previously_authorized_amount():
+def capture_previously_authorized_amount(transactionId):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
@@ -15,9 +15,7 @@ def capture_previously_authorized_amount():
 	transactionrequest = apicontractsv1.transactionRequestType()
 	transactionrequest.transactionType = "priorAuthCaptureTransaction"
 	transactionrequest.amount = Decimal ('2.55')
-	transactionrequest.refTransId = "2245440574"
-
-
+	transactionrequest.refTransId = transactionId
 
 	createtransactionrequest = apicontractsv1.createTransactionRequest()
 	createtransactionrequest.merchantAuthentication = merchantAuth
@@ -55,4 +53,4 @@ def capture_previously_authorized_amount():
 	return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	capture_previously_authorized_amount()
+	capture_previously_authorized_amount('12345678')
