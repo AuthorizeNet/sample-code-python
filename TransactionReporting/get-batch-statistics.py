@@ -40,6 +40,7 @@ def get_batch_statistics():
 				print('Message Code : %s' % batchStatisticsResponse.messages.message[0]['code'].text)
 				print('Message Text : %s' % batchStatisticsResponse.messages.message[0]['text'].text)
 		else:
+			if batchStatisticsResponse.messages is not None:
 				print('Failed to get batch statistics.\nCode:%s \nText:%s' % (batchStatisticsResponse.messages.message[0]['code'].text,batchStatisticsResponse.messages.message[0]['text'].text))
 
 	return batchStatisticsResponse
