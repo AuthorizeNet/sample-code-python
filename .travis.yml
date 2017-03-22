@@ -5,7 +5,12 @@ python:
   - "2.7"
   - "3.4"
   - "3.5"
-  # - "pypy" Disabling pypy until travis moves to newer version, known issue with lxml crashing pypy
+  - "3.6"
+  - "3.7-dev"
+  # - "pypy"
+  # - "pypy3"
+  # pypy will just crash due to an incompatibility with lxml.
+  # Newer versions of pypy seem to crash also, so we probably have to fix with a newer version of lxml
   
 install:
  - pip install authorizenet

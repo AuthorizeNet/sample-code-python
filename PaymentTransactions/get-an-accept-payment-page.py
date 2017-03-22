@@ -44,11 +44,11 @@ def get_an_accept_payment_page(amount):
 
 			print('Token : %s' % paymentPageResponse.token)
 
-			if paymentPageResponse.messages:
+			if paymentPageResponse.messages is not None:
 				print('Message Code : %s' % paymentPageResponse.messages.message[0]['code'].text)
 				print('Message Text : %s' % paymentPageResponse.messages.message[0]['text'].text)
 		else:
-			if paymentPageResponse.messages:
+			if paymentPageResponse.messages is not None:
 				print('Failed to get batch statistics.\nCode:%s \nText:%s' % (paymentPageResponse.messages.message[0]['code'].text,paymentPageResponse.messages.message[0]['text'].text))
 
 	return paymentPageResponse
