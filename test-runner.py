@@ -311,7 +311,7 @@ class TestRunner(unittest.TestCase):
 	def authorize_credit_card(self):
 		print("authorize_credit_card")
 		modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
-		return modl.authorize_credit_card()
+		return modl.authorize_credit_card(self.getAmount())
 
 	def capture_funds_authorized_through_another_channel(self):
 		print("capture_funds_authorized_through_another_channel")
