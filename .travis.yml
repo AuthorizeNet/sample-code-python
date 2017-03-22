@@ -7,7 +7,7 @@ python:
   - "3.5"
   - "3.6"
   - "3.7-dev"
-  - "pypy"
+  - "pypy-5.7.0"
   - "pypy3"
   
 install:
