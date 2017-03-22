@@ -55,7 +55,7 @@ class TestRunner(unittest.TestCase):
 
 		#Create transaction
 		modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
-		response = modl.authorize_credit_card()
+		response = modl.authorize_credit_card(self.getAmount())
 
 		#create customer payment profile for above transaction
 		modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile-from-transaction.py')
@@ -322,7 +322,7 @@ class TestRunner(unittest.TestCase):
 		print("capture_previously_authorized_amount")
 		
 		modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
-		response = modl.authorize_credit_card()
+		response = modl.authorize_credit_card(self.getAmount())
 		
 		modl = imp.load_source('modulename', 'PaymentTransactions/capture-previously-authorized-amount.py')
 		return modl.capture_previously_authorized_amount(response.transactionResponse.transId)
@@ -372,7 +372,7 @@ class TestRunner(unittest.TestCase):
 		print("refund_transaction")
 
 		modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
-		response = modl.authorize_credit_card()
+		response = modl.authorize_credit_card(self.getAmount())
 
 		modl = imp.load_source('modulename', 'PaymentTransactions/refund-transaction.py')
 		return modl.refund_transaction(response.transactionResponse.transId)
@@ -386,7 +386,7 @@ class TestRunner(unittest.TestCase):
 		print("void_transaction")
 
 		modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
-		response = modl.authorize_credit_card()
+		response = modl.authorize_credit_card(self.getAmount())
 
 		modl = imp.load_source('modulename', 'PaymentTransactions/void-transaction.py')
 		return modl.void_transaction(response.transactionResponse.transId)
@@ -559,7 +559,7 @@ class TestRunner(unittest.TestCase):
 		print("get_transaction_details")
 
 		modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
-		response = modl.authorize_credit_card()
+		response = modl.authorize_credit_card(self.getAmount())
 
 		modl = imp.load_source('modulename', 'TransactionReporting/get-transaction-details.py')
 		return modl.get_transaction_details(response.transactionResponse.transId)
