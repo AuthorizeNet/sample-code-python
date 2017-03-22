@@ -55,7 +55,7 @@ def charge_credit_card(amount):
 
 	# Create a transactionRequestType object and add the previous objects to it.
 	transactionrequest = apicontractsv1.transactionRequestType()
-	transactionrequest.transactionType = "authOnlyTransaction"
+	transactionrequest.transactionType = "authCaptureTransaction"
 	transactionrequest.amount = amount
 	transactionrequest.payment = payment
 	transactionrequest.order = order
