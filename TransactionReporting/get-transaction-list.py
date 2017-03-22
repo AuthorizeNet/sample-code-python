@@ -35,6 +35,7 @@ def get_transaction_list():
 				print('Message Code : %s' % transactionListResponse.messages.message[0]['code'].text)
 				print('Message Text : %s' % transactionListResponse.messages.message[0]['text'].text)
 		else:
+			if transactionListResponse.messages is not None:
 				print('Failed to get transaction list.\nCode:%s \nText:%s' % (transactionListResponse.messages.message[0]['code'].text,transactionListResponse.messages.message[0]['text'].text))
 
 	return transactionListResponse
