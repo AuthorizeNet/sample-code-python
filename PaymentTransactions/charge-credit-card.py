@@ -50,16 +50,18 @@ def charge_credit_card(amount):
 	duplicateWindowSetting = apicontractsv1.settingType();
 	duplicateWindowSetting.settingName = "duplicateWindow"
 	duplicateWindowSetting.settingValue = "600"
+	settings = apicontractsv1.ArrayOfSetting()
+	settings.setting.append(duplicateWindowSetting)
 
 	# Create a transactionRequestType object and add the previous objects to it.
 	transactionrequest = apicontractsv1.transactionRequestType()
-	transactionrequest.transactionType = "authCaptureTransaction"
+	transactionrequest.transactionType = "authOnlyTransaction"
 	transactionrequest.amount = amount
 	transactionrequest.payment = payment
 	transactionrequest.order = order
 	transactionrequest.billTo = customerAddress
 	transactionrequest.customer = customerData
-	transactionrequest.transactionSettings = duplicateWindowSetting
+	transactionrequest.transactionSettings = settings
 
 	# Assemble the complete transaction request
 	createtransactionrequest = apicontractsv1.createTransactionRequest()
