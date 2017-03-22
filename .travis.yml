@@ -7,8 +7,10 @@ python:
   - "3.5"
   - "3.6"
   - "3.7-dev"
-  - "pypy-5.7.0"
-  - "pypy3"
+  # - "pypy"
+  # - "pypy3"
+  # pypy will just crash due to an incompatibility with lxml.
+  # Newer versions of pypy seem to crash also, so we probably have to fix with a newer version of lxml
   
 install:
  - pip install authorizenet
