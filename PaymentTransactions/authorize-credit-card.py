@@ -36,7 +36,7 @@ def authorize_credit_card(amount):
 	customerAddress.company = "Souveniropolis"
 	customerAddress.address = "14 Main Street"
 	customerAddress.city = "Pecan Springs"
-	customerAddress.state = "TX
+	customerAddress.state = "TX"
 	customerAddress.zip = "44628"
 	customerAddress.country = "USA"
 	
