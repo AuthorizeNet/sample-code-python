@@ -13,6 +13,9 @@ def create_an_accept_transaction(amount):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
+	
+	# Set the transaction's refId
+	refId = "ref {}" format(time.time())
 
 	# Create the payment object for a payment nonce
 	opaqueData = apicontractsv1.opaqueDataType()
@@ -46,7 +49,7 @@ def create_an_accept_transaction(amount):
 	customerData.email = "EllenJohnson@example.com"
 	
 	# Add values for transaction settings
-	duplicateWindowSetting = apicontractsv1.settingType();
+	duplicateWindowSetting = apicontractsv1.settingType()
 	duplicateWindowSetting.settingName = "duplicateWindow"
 	duplicateWindowSetting.settingValue = "600"
 	settings = apicontractsv1.ArrayOfSetting()
@@ -65,9 +68,9 @@ def create_an_accept_transaction(amount):
 	# Assemble the complete transaction request
 	createtransactionrequest = apicontractsv1.createTransactionRequest()
 	createtransactionrequest.merchantAuthentication = merchantAuth
-	createtransactionrequest.refId = "MerchantID-0001"
+	createtransactionrequest.refId = refId
 	createtransactionrequest.transactionRequest = transactionrequest
-    
+	
 	# Create the controller and get response
 	createtransactioncontroller = createTransactionController(createtransactionrequest)
 	createtransactioncontroller.execute()
@@ -80,26 +83,27 @@ def create_an_accept_transaction(amount):
 			# Since the API request was successful, look for a transaction response
 			# and parse it to display the results of authorizing the card
 			if hasattr(response.transactionResponse, 'messages') == True:
-				print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId);
-				print ('Transaction Response Code: %s' % response.transactionResponse.responseCode);
-				print ('Message Code: %s' % response.transactionResponse.messages.message[0].code);
-				print ('Description: %s' % response.transactionResponse.messages.message[0].description);
+				print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId)
+				print ('Transaction Response Code: %s' % response.transactionResponse.responseCode)
+				print ('Message Code: %s' % response.transactionResponse.messages.message[0].code)
+				print ('Auth Code: %s' % response.transactionResponse.authCode)
+				print ('Description: %s' % response.transactionResponse.messages.message[0].description)
 			else:
-				print ('Failed Transaction.');
+				print ('Failed Transaction.')
 				if hasattr(response.transactionResponse, 'errors') == True:
-					print ('Error Code:  %s' % str(response.transactionResponse.errors.error[0].errorCode));
-					print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+					print ('Error Code:  %s' % str(response.transactionResponse.errors.error[0].errorCode))
+					print ('Error Message: %s' % response.transactionResponse.errors.error[0].errorText)
 		# Or, print errors if the API request wasn't successful
 		else:
-			print ('Failed Transaction.');
+			print ('Failed Transaction.')
 			if hasattr(response, 'transactionResponse') == True and hasattr(response.transactionResponse, 'errors') == True:
-				print ('Error Code: %s' % str(response.transactionResponse.errors.error[0].errorCode));
-				print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
+				print ('Error Code: %s' % str(response.transactionResponse.errors.error[0].errorCode))
+				print ('Error Message: %s' % response.transactionResponse.errors.error[0].errorText)
 			else:
-				print ('Error Code: %s' % response.messages.message[0]['code'].text);
-				print ('Error message: %s' % response.messages.message[0]['text'].text);
+				print ('Error Code: %s' % response.messages.message[0]['code'].text)
+				print ('Error Message: %s' % response.messages.message[0]['text'].text)
 	else:
-		print ('Null Response.');
+		print ('Null Response.')
 
 	return response
 
