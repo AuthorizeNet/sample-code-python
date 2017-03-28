@@ -1,5 +1,6 @@
 import os, sys
 import imp
+import time
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
@@ -15,7 +16,7 @@ def create_an_accept_transaction(amount):
 	merchantAuth.transactionKey = constants.transactionKey
 	
 	# Set the transaction's refId
-	refId = "ref {}" format(time.time())
+	refId = "ref {}".format(time.time())
 
 	# Create the payment object for a payment nonce
 	opaqueData = apicontractsv1.opaqueDataType()
