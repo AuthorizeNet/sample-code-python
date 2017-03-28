@@ -6,7 +6,7 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def create-an-accept-payment-transaction(amount):
+def create_an_accept_payment_transaction(amount):
 
 	# Create a merchantAuthenticationType object with authentication details
 	# retrieved from the constants file
@@ -67,7 +67,7 @@ def create-an-accept-payment-transaction(amount):
 	createtransactionrequest.merchantAuthentication = merchantAuth
 	createtransactionrequest.refId = "MerchantID-0001"
 	createtransactionrequest.transactionRequest = transactionrequest
-  
+    
 	# Create the controller and get response
 	createtransactioncontroller = createTransactionController(createtransactionrequest)
 	createtransactioncontroller.execute()
@@ -104,4 +104,4 @@ def create-an-accept-payment-transaction(amount):
 	return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	create-an-accept-payment-transaction(constants.amount)
+	create_an_accept_payment_transaction(constants.amount)
