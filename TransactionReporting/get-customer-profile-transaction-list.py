@@ -6,7 +6,7 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def get_transaction_list_for_customer(customerProfileId):
+def get_customer_profile_transaction_list(customerProfileId):
 	merchantAuth = apicontractsv1.merchantAuthenticationType()
 	merchantAuth.name = constants.apiLoginId
 	merchantAuth.transactionKey = constants.transactionKey
@@ -41,4 +41,4 @@ def get_transaction_list_for_customer(customerProfileId):
 	return transactionListForCustomerResponse
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	get_transaction_list_for_customer('36152127')
+	get_customer_profile_transaction_list('36152127')
