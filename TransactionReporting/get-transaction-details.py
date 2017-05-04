@@ -32,12 +32,14 @@ def get_transaction_details(transId):
 			print('Settle Amount : %s' % transactionDetailsResponse.transaction.settleAmount)
 			if hasattr(transactionDetailsResponse.transaction, 'tax') == True:
 				print('Tax : %s' % transactionDetailsResponse.transaction.tax.amount)
+			if hasattr(transactionDetailsResponse.transaction, 'profile'):
+				print('Customer Profile Id : %s' % transactionDetailsResponse.transaction.profile.customerProfileId)
 
-			if transactionDetailsResponse.messages:
+			if transactionDetailsResponse.messages is not None:
 				print('Message Code : %s' % transactionDetailsResponse.messages.message[0]['code'].text)
 				print('Message Text : %s' % transactionDetailsResponse.messages.message[0]['text'].text)
 		else:
-			if transactionDetailsResponse.messages:
+			if transactionDetailsResponse.messages is not None:
 				print('Failed to get transaction details.\nCode:%s \nText:%s' % (transactionDetailsResponse.messages.message[0]['code'].text,transactionDetailsResponse.messages.message[0]['text'].text))
 
 	return transactionDetailsResponse

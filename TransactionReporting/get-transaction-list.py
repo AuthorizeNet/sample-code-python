@@ -30,6 +30,8 @@ def get_transaction_list():
 				print('Transaction Status : %s' % transaction.transactionStatus)
 				print('Amount Type : %s' % transaction.accountType)
 				print('Settle Amount : %s' % transaction.settleAmount)
+				if hasattr(transaction, 'profile'):
+					print('Customer Profile Id : %s' % transaction.profile.customerProfileId)
 
 			if transactionListResponse.messages is not None:
 				print('Message Code : %s' % transactionListResponse.messages.message[0]['code'].text)
