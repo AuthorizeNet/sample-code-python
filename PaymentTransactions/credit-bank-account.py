@@ -18,7 +18,7 @@ def credit_bank_account():
 	bankAccountType = apicontractsv1.bankAccountType()
 	accountType = apicontractsv1.bankAccountTypeEnum
 	bankAccountType.accountType = accountType.checking
-	bankAccountType.routingNumber = "125000024"
+	bankAccountType.routingNumber = "121042882"
 	bankAccountType.accountNumber = "12345678"
 	bankAccountType.nameOnAccount = "John Doe"
 
