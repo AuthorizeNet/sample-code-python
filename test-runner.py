@@ -494,11 +494,11 @@ class TestRunner(unittest.TestCase):
 
 		return response
 		
-	def get_list_of_subscription(self):
-		print("get_list_of_subscription")
+	def get_list_of_subscriptions(self):
+		print("get_list_of_subscriptions")
 
-		modl = imp.load_source('modulename', 'RecurringBilling/get-list-of-subscription.py')
-		return modl.get_list_of_subscription()
+		modl = imp.load_source('modulename', 'RecurringBilling/get-list-of-subscriptions.py')
+		return modl.get_list_of_subscriptions()
 
 	def get_subscription_status(self):
 		print("get_subscription_status")
