@@ -7,50 +7,50 @@ constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def capture_previously_authorized_amount(transactionId):
-	merchantAuth = apicontractsv1.merchantAuthenticationType()
-	merchantAuth.name = constants.apiLoginId
-	merchantAuth.transactionKey = constants.transactionKey
+    merchantAuth = apicontractsv1.merchantAuthenticationType()
+    merchantAuth.name = constants.apiLoginId
+    merchantAuth.transactionKey = constants.transactionKey
 
 
-	transactionrequest = apicontractsv1.transactionRequestType()
-	transactionrequest.transactionType = "priorAuthCaptureTransaction"
-	transactionrequest.amount = Decimal ('2.55')
-	transactionrequest.refTransId = transactionId
+    transactionrequest = apicontractsv1.transactionRequestType()
+    transactionrequest.transactionType = "priorAuthCaptureTransaction"
+    transactionrequest.amount = Decimal ('2.55')
+    transactionrequest.refTransId = transactionId
 
-	createtransactionrequest = apicontractsv1.createTransactionRequest()
-	createtransactionrequest.merchantAuthentication = merchantAuth
-	createtransactionrequest.refId = "MerchantID-0001"
+    createtransactionrequest = apicontractsv1.createTransactionRequest()
+    createtransactionrequest.merchantAuthentication = merchantAuth
+    createtransactionrequest.refId = "MerchantID-0001"
 
-	createtransactionrequest.transactionRequest = transactionrequest
-	createtransactioncontroller = createTransactionController(createtransactionrequest)
-	createtransactioncontroller.execute()
+    createtransactionrequest.transactionRequest = transactionrequest
+    createtransactioncontroller = createTransactionController(createtransactionrequest)
+    createtransactioncontroller.execute()
 
-	response = createtransactioncontroller.getresponse()
+    response = createtransactioncontroller.getresponse()
 
-	if response is not None:
-		if response.messages.resultCode == "Ok":
-			if hasattr(response.transactionResponse, 'messages') == True:
-				print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId);
-				print ('Transaction Response Code: %s' % response.transactionResponse.responseCode);
-				print ('Message Code: %s' % response.transactionResponse.messages.message[0].code);
-				print ('Description: %s' % response.transactionResponse.messages.message[0].description);
-			else:
-				print ('Failed Transaction.');
-				if hasattr(response.transactionResponse, 'errors') == True:
-					print ('Error Code:  %s' % str(response.transactionResponse.errors.error[0].errorCode));
-					print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
-		else:
-			print ('Failed Transaction.');
-			if hasattr(response, 'transactionResponse') == True and hasattr(response.transactionResponse, 'errors') == True:
-				print ('Error Code: %s' % str(response.transactionResponse.errors.error[0].errorCode));
-				print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText);
-			else:
-				print ('Error Code: %s' % response.messages.message[0]['code'].text);
-				print ('Error message: %s' % response.messages.message[0]['text'].text);
-	else:
-		print ('Null Response.');
+    if response is not None:
+        if response.messages.resultCode == "Ok":
+            if hasattr(response.transactionResponse, 'messages') == True:
+                print ('Successfully created transaction with Transaction ID: %s' % response.transactionResponse.transId)
+                print ('Transaction Response Code: %s' % response.transactionResponse.responseCode)
+                print ('Message Code: %s' % response.transactionResponse.messages.message[0].code)
+                print ('Description: %s' % response.transactionResponse.messages.message[0].description)
+            else:
+                print ('Failed Transaction.')
+                if hasattr(response.transactionResponse, 'errors') == True:
+                    print ('Error Code:  %s' % str(response.transactionResponse.errors.error[0].errorCode))
+                    print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText)
+        else:
+            print ('Failed Transaction.')
+            if hasattr(response, 'transactionResponse') == True and hasattr(response.transactionResponse, 'errors') == True:
+                print ('Error Code: %s' % str(response.transactionResponse.errors.error[0].errorCode))
+                print ('Error message: %s' % response.transactionResponse.errors.error[0].errorText)
+            else:
+                print ('Error Code: %s' % response.messages.message[0]['code'].text)
+                print ('Error message: %s' % response.messages.message[0]['text'].text)
+    else:
+        print ('Null Response.')
 
-	return response
+    return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	capture_previously_authorized_amount('12345678')
+    capture_previously_authorized_amount('12345678')

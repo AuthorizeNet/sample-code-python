@@ -7,37 +7,37 @@ constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
 def get_unsettled_transaction_list():
-	merchantAuth = apicontractsv1.merchantAuthenticationType()
-	merchantAuth.name = constants.apiLoginId
-	merchantAuth.transactionKey = constants.transactionKey
+    merchantAuth = apicontractsv1.merchantAuthenticationType()
+    merchantAuth.name = constants.apiLoginId
+    merchantAuth.transactionKey = constants.transactionKey
 
-	unsettledTransactionListRequest = apicontractsv1.getUnsettledTransactionListRequest()
-	unsettledTransactionListRequest.merchantAuthentication = merchantAuth
+    unsettledTransactionListRequest = apicontractsv1.getUnsettledTransactionListRequest()
+    unsettledTransactionListRequest.merchantAuthentication = merchantAuth
 
-	unsettledTransactionListController = getUnsettledTransactionListController(unsettledTransactionListRequest)
+    unsettledTransactionListController = getUnsettledTransactionListController(unsettledTransactionListRequest)
 
-	unsettledTransactionListController.execute()
+    unsettledTransactionListController.execute()
 
-	unsettledTransactionListResponse = unsettledTransactionListController.getresponse()
+    unsettledTransactionListResponse = unsettledTransactionListController.getresponse()
 
-	if unsettledTransactionListResponse is not None:
-		if unsettledTransactionListResponse.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
-			print('Successfully got unsettled transaction list!')
+    if unsettledTransactionListResponse is not None:
+        if unsettledTransactionListResponse.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
+            print('Successfully got unsettled transaction list!')
 
-			for transaction in unsettledTransactionListResponse.transactions.transaction:
-				print('Transaction Id : %s' % transaction.transId)
-				print('Transaction Status : %s' % transaction.transactionStatus)
-				print('Amount Type : %s' % transaction.accountType)
-				print('Settle Amount : %s' % transaction.settleAmount)
+            for transaction in unsettledTransactionListResponse.transactions.transaction:
+                print('Transaction Id : %s' % transaction.transId)
+                print('Transaction Status : %s' % transaction.transactionStatus)
+                print('Amount Type : %s' % transaction.accountType)
+                print('Settle Amount : %s' % transaction.settleAmount)
 
-			if unsettledTransactionListResponse.messages:
-				print('Message Code : %s' % unsettledTransactionListResponse.messages.message[0]['code'].text)
-				print('Message Text : %s' % unsettledTransactionListResponse.messages.message[0]['text'].text)
-		else:
-			if unsettledTransactionListResponse.messages:
-				print('Failed to get unsettled transaction list.\nCode:%s \nText:%s' % (unsettledTransactionListResponse.messages.message[0]['code'].text,unsettledTransactionListResponse.messages.message[0]['text'].text))
+            if unsettledTransactionListResponse.messages:
+                print('Message Code : %s' % unsettledTransactionListResponse.messages.message[0]['code'].text)
+                print('Message Text : %s' % unsettledTransactionListResponse.messages.message[0]['text'].text)
+        else:
+            if unsettledTransactionListResponse.messages:
+                print('Failed to get unsettled transaction list.\nCode:%s \nText:%s' % (unsettledTransactionListResponse.messages.message[0]['code'].text,unsettledTransactionListResponse.messages.message[0]['text'].text))
 
-	return unsettledTransactionListResponse
+    return unsettledTransactionListResponse
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	get_unsettled_transaction_list()
+    get_unsettled_transaction_list()

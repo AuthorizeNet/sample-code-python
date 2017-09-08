@@ -8,42 +8,42 @@ from decimal import *
 
 def get_batch_statistics():
 
-	merchantAuth = apicontractsv1.merchantAuthenticationType()
-	merchantAuth.name = constants.apiLoginId
-	merchantAuth.transactionKey = constants.transactionKey
+    merchantAuth = apicontractsv1.merchantAuthenticationType()
+    merchantAuth.name = constants.apiLoginId
+    merchantAuth.transactionKey = constants.transactionKey
 
-	batchStatisticsRequest = apicontractsv1.getBatchStatisticsRequest()
-	batchStatisticsRequest.merchantAuthentication = merchantAuth
-	batchStatisticsRequest.batchId = "4532808"
+    batchStatisticsRequest = apicontractsv1.getBatchStatisticsRequest()
+    batchStatisticsRequest.merchantAuthentication = merchantAuth
+    batchStatisticsRequest.batchId = "4532808"
 
-	batchStatisticsController = getBatchStatisticsController(batchStatisticsRequest)
+    batchStatisticsController = getBatchStatisticsController(batchStatisticsRequest)
 
-	batchStatisticsController.execute()
+    batchStatisticsController.execute()
 
-	batchStatisticsResponse = batchStatisticsController.getresponse()
+    batchStatisticsResponse = batchStatisticsController.getresponse()
 
-	if batchStatisticsResponse is not None:
-		if batchStatisticsResponse.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
-			print('Successfully got batch statistics!')
+    if batchStatisticsResponse is not None:
+        if batchStatisticsResponse.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
+            print('Successfully got batch statistics!')
 
-			print('Batch Id : %s' % batchStatisticsResponse.batch.batchId)
-			print('Batch Settlement State : %s' % batchStatisticsResponse.batch.settlementState)
-			print('Batch Payment Method : %s' % batchStatisticsResponse.batch.paymentMethod)
+            print('Batch Id : %s' % batchStatisticsResponse.batch.batchId)
+            print('Batch Settlement State : %s' % batchStatisticsResponse.batch.settlementState)
+            print('Batch Payment Method : %s' % batchStatisticsResponse.batch.paymentMethod)
 
-			for statistic in batchStatisticsResponse.batch.statistics.statistic:
-				print('Account Type : %s' % statistic.accountType)
-				print('Charge Amount : %s' % statistic.chargeAmount)
-				print('Refund Amount : %s' % statistic.refundAmount)
-				print('Decline Count : %s' % statistic.declineCount)
+            for statistic in batchStatisticsResponse.batch.statistics.statistic:
+                print('Account Type : %s' % statistic.accountType)
+                print('Charge Amount : %s' % statistic.chargeAmount)
+                print('Refund Amount : %s' % statistic.refundAmount)
+                print('Decline Count : %s' % statistic.declineCount)
 
-			if batchStatisticsResponse.messages is not None:
-				print('Message Code : %s' % batchStatisticsResponse.messages.message[0]['code'].text)
-				print('Message Text : %s' % batchStatisticsResponse.messages.message[0]['text'].text)
-		else:
-			if batchStatisticsResponse.messages is not None:
-				print('Failed to get batch statistics.\nCode:%s \nText:%s' % (batchStatisticsResponse.messages.message[0]['code'].text,batchStatisticsResponse.messages.message[0]['text'].text))
+            if batchStatisticsResponse.messages is not None:
+                print('Message Code : %s' % batchStatisticsResponse.messages.message[0]['code'].text)
+                print('Message Text : %s' % batchStatisticsResponse.messages.message[0]['text'].text)
+        else:
+            if batchStatisticsResponse.messages is not None:
+                print('Failed to get batch statistics.\nCode:%s \nText:%s' % (batchStatisticsResponse.messages.message[0]['code'].text,batchStatisticsResponse.messages.message[0]['text'].text))
 
-	return batchStatisticsResponse
+    return batchStatisticsResponse
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-	get_batch_statistics()
+    get_batch_statistics()
