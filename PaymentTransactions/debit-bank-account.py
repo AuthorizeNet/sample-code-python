@@ -24,12 +24,12 @@ def debit_bank_account():
     accountType = apicontractsv1.bankAccountTypeEnum
     bankAccountType.accountType = accountType.checking
     bankAccountType.routingNumber = "121042882"
-    bankAccountType.accountNumber = "12345678"
+    bankAccountType.accountNumber = "123456789"
     bankAccountType.nameOnAccount = "John Doe"
 
     transactionrequest = apicontractsv1.transactionRequestType()
     transactionrequest.transactionType = "authCaptureTransaction"
-    transactionrequest.amount = Decimal (amount)
+    transactionrequest.amount = Decimal(amount)
     transactionrequest.payment = payment
     transactionrequest.payment.bankAccount = bankAccountType
 
