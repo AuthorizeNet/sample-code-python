@@ -394,57 +394,57 @@ class TestRunner(unittest.TestCase):
     def authorization_and_capture_continue(self):
         print("authorization_and_capture_continue")
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-and-capture.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-and-capture-continue.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture-continue.py')
         return modl.authorization_and_capture_continue(str(response.transactionResponse.transId), "6ZSCSYG33VP8Q")
 
     def authorization_and_capture(self):
         print("authorization_and_capture")
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-and-capture.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
         return modl.authorization_and_capture(self.getAmount())
 
     def authorization_only_continued(self):
         print("authorization_only_continued")
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-only-continued.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-only-continued.py')
         return modl.authorization_only_continued()
 
     def authorization_only(self):
         print("authorization_only")
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-only.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-only.py')
         return modl.authorization_only()
 
     def credit(self):
         print("credit")
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/credit.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/credit.py')
         return modl.credit()
 
     def get_details(self):
         print("get_details")
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-and-capture.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/get-details.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/get-details.py')
         return modl.get_details(str(response.transactionResponse.transId))
 
     def prior_authorization_capture(self):
         print("prior_authorization_capture")
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-and-capture.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/prior-authorization-capture.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/prior-authorization-capture.py')
         return modl.prior_authorization_capture(str(response.transactionResponse.transId))
 
     def void(self):
         print("void")
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/authorization-and-capture.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PaypalExpressCheckout/void.py')
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/void.py')
         return modl.void(str(response.transactionResponse.transId))
 
     def cancel_subscription(self):

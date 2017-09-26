@@ -58,3 +58,6 @@ target/
 
 # Operating system files
 .DS_Store
+
+# IDE
+.vscode/
