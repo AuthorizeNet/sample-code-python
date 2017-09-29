@@ -167,6 +167,10 @@ class TestRunner(unittest.TestCase):
 
         return response
 
+    def get_customer_payment_profile_list(self):
+        print("get_customer_payment_profile_list")
+        modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-payment-profile-list.py')
+        return modl.get_customer_payment_profile_list()
 
     def get_customer_profile_ids(self):
         print("get_customer_profile_ids")
