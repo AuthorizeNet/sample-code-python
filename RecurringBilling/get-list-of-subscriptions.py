@@ -13,12 +13,15 @@ def get_list_of_subscriptions():
     merchantAuth.name = constants.apiLoginId
     merchantAuth.transactionKey = constants.transactionKey
 
+    # set sorting parameters
     sorting = apicontractsv1.ARBGetSubscriptionListSorting()
     sorting.orderBy = apicontractsv1.ARBGetSubscriptionListOrderFieldEnum.id
-    sorting.orderDescending = "false"
+    sorting.orderDescending = True
 
+    # set paging and offset parameters
     paging = apicontractsv1.Paging()
-    paging.limit = 100
+    # Paging limit can be up to 1000 for this request
+    paging.limit = 20
     paging.offset = 1
 
     request = apicontractsv1.ARBGetSubscriptionListRequest()
@@ -31,17 +34,36 @@ def get_list_of_subscriptions():
     controller = ARBGetSubscriptionListController(request)
     controller.execute()
 
+    # Work on the response
     response = controller.getresponse()
 
-    if response.messages.resultCode == "Ok":
-        print "SUCCESS"
-        print "Message Code : %s" % response.messages.message[0]['code'].text
-        print "Message text : %s" % response.messages.message[0]['text'].text
-        print "Total Number In Results : %s" % response.totalNumInResultSet
+    if response is not None:
+        if response.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
+            if hasattr(response, 'subscriptionDetails'):
+                print('Successfully retrieved subscription list.')
+                if response.messages is not None:
+                    print('Message Code: %s' % response.messages.message[0]['code'].text)
+                    print('Message Text: %s' % response.messages.message[0]['text'].text)
+                    print('Total Number In Results: %s' % response.totalNumInResultSet)
+                    print()
+                for subscription in response.subscriptionDetails.subscriptionDetail:
+                    print('Subscription Id: %s' % subscription.id)
+                    print('Subscription Name: %s' % subscription.name)
+                    print('Subscription Status: %s' % subscription.status)
+                    print('Customer Profile Id: %s' % subscription.customerProfileId)
+                    print()
+            else:
+                if response.messages is not None:
+                    print('Failed to get subscription list.')
+                    print('Code: %s' % (response.messages.message[0]['code'].text))
+                    print('Text: %s' % (response.messages.message[0]['text'].text))
+        else:
+            if response.messages is not None:
+                print('Failed to get transaction list.')
+                print('Code: %s' % (response.messages.message[0]['code'].text))
+                print('Text: %s' % (response.messages.message[0]['text'].text))
     else:
-        print "ERROR"
-        print "Message Code : %s" % response.messages.message[0]['code'].text
-        print "Message text : %s" % response.messages.message[0]['text'].text
+        print('Error. No response received.')
 
     return response
 
