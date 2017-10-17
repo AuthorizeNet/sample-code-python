@@ -17,7 +17,7 @@ You can also run each sample directly from the command line.
 ```
     $ git clone https://github.com/AuthorizeNet/sample-code-python.git
 ```
-* Install the [Authorize.Net Python SDK](https://www.github.com/AuthorizeNet/sdk-python).
+* Install the [Authorize.Net Python SDK](https://www.github.com/AuthorizeNet/sdk-python):
 ```
     $ pip install authorizenet
 ```  
