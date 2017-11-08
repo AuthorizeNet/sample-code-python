@@ -395,14 +395,14 @@ class TestRunner(unittest.TestCase):
         modl = imp.load_source('modulename', 'PaymentTransactions/void-transaction.py')
         return modl.void_transaction(response.transactionResponse.transId)
 
-    def authorization_and_capture_continue(self):
-        print("authorization_and_capture_continue")
+    def authorization_and_capture_continued(self):
+        print("authorization_and_capture_continued")
 
         modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture-continue.py')
-        return modl.authorization_and_capture_continue(str(response.transactionResponse.transId), "6ZSCSYG33VP8Q")
+        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture-continued.py')
+        return modl.authorization_and_capture_continued(str(response.transactionResponse.transId), "6ZSCSYG33VP8Q")
 
     def authorization_and_capture(self):
         print("authorization_and_capture")
