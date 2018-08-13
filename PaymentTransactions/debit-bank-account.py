@@ -29,7 +29,7 @@ def debit_bank_account(amount):
     accountType = apicontractsv1.bankAccountTypeEnum
     bankAccount.accountType = accountType.checking
     bankAccount.routingNumber = "121042882"
-    bankAccount.accountNumber = "1234567890"
+    bankAccount.accountNumber = str(random.randint(10000,999999999999))
     bankAccount.nameOnAccount = "John Doe"
 
     # Add the payment data to a paymentType object
