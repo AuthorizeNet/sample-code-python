@@ -15,6 +15,7 @@ def get_subscription(subscriptionId):
     getSubscription = apicontractsv1.ARBGetSubscriptionRequest()
     getSubscription.merchantAuthentication = merchantAuth
     getSubscription.subscriptionId = subscriptionId
+    getSubscription.includeTransactions = True
 
     getSubscriptionController = ARBGetSubscriptionController(getSubscription)
     getSubscriptionController.execute()
@@ -23,6 +24,9 @@ def get_subscription(subscriptionId):
 
     if (response.messages.resultCode=="Ok"):
         print ("Subscription Name : %s" % response.subscription.name)
+        print ("Subscription Amount: %s" % response.subscription.amount)
+        for transaction in response.subscription.arbTransactions.arbTransaction:
+            print "Transaction id: %d" % transaction.transId
     else:
         print ("response code: %s" % response.messages.resultCode)
 
