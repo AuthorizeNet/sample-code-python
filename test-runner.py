@@ -602,6 +602,12 @@ class TestRunner(unittest.TestCase):
         print("update_held_transaction")
         modl = imp.load_source('modulename', 'PaymentTransactions/update-held-transaction.py')
         return modl.update_held_transaction("12345")
+	    
+	def get_account_updater_job_details(self):
+        print("get_account_updater_job_details")
+        modl = imp.load_source('modulename', 'TransactionReporting/get-account-updater-job-details.py')
+        return modl.get_account_updater_job_details()
+	
 
     def validate_response(self, response):
         if(response is None):
