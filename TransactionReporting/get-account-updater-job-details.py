@@ -27,7 +27,7 @@ def get_account_updater_job_details():
         if response.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
 
                 if hasattr(response, 'auDetails'):
-                    print('SUCCESS: Get Account Updater job details for Month and year :' + request.month)
+                    print('SUCCESS: Get Account Updater job details for Month:' + request.month)
                     if response.messages is not None:
                         print('Message Code: %s' % response.messages.message[0]['code'].text)
                         print('Message Text: %s' % response.messages.message[0]['text'].text)
@@ -37,8 +37,8 @@ def get_account_updater_job_details():
                         for details in response.auDetails.auDelete:
                             print('Deleted Profile:')
                             # auDelete Start
+                            print('Customer Profile ID: %s' % details.customerProfileID)
                             print('Customer Payment Profile ID: %s' % details.customerPaymentProfileID)
-                            print('Customer  Profile ID: %s' % details.customerProfileID)
                             print('First Name: %s' % details.firstName)
                             print('Last Name: %s' % details.lastName)
                             print('AU Reason Code: %s' % details.auReasonCode)
@@ -61,8 +61,8 @@ def get_account_updater_job_details():
 
                                 # auUpdate Start
                                 print('Updated Profile:')
+                                print('Customer Profile ID: %s' % details.customerProfileID)
                                 print('Customer Payment Profile ID: %s' % details.customerPaymentProfileID)
-                                print('Customer  Profile ID: %s' % details.customerProfileID)
                                 print('First Name: %s' % details.firstName)
                                 print('Last Name: %s' % details.lastName)
                                 print('AU Reason Code: %s' % details.auReasonCode)
@@ -83,7 +83,7 @@ def get_account_updater_job_details():
                                         print('Subscription Id: %s' % details.subscriptionIdList.subscriptionId)
 
                 else:
-                        print('Failed to get Get Account Updater job details for Month and year :' + request.month)
+                        print('Failed to get Get Account Updater job details for Month:' + request.month)
                         print('Message Code: %s' % response.messages.message[0]['code'].text)
                         print('Message Text: %s' % response.messages.message[0]['text'].text)
 
