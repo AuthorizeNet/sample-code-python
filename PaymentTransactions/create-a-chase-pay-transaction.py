@@ -27,7 +27,7 @@ def create_a_chase_pay_transaction():
 
     transactionrequest = apicontractsv1.transactionRequestType()
     transactionrequest.transactionType = "authCaptureTransaction"
-    transactionrequest.amount = Decimal ('1.5')
+    transactionrequest.amount = Decimal ('1.50')
     transactionrequest.payment = payment
 
     createtransactionrequest = apicontractsv1.createTransactionRequest()
