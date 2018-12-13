@@ -6,7 +6,7 @@ from authorizenet.apicontrollers import *
 from authorizenet.constants import constants
 from decimal import *
 
-def create_a_chase_pay_transaction():
+def create_chase_pay_transaction():
     merchantAuth = apicontractsv1.merchantAuthenticationType()
     merchantAuth.name = constants.apiLoginId
     merchantAuth.transactionKey = constants.transactionKey
@@ -68,4 +68,4 @@ def create_a_chase_pay_transaction():
     return response    
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-    create_a_chase_pay_transaction()
+    create_chase_pay_transaction()
