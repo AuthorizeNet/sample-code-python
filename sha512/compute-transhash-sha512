@@ -1,0 +1,29 @@
+# This is a program to compute TransHash for a given Transaction
+# Neccessary paramters :- SignatureKey,ApiLoginId, TransId for the Transaction,Amount Transacted
+# For more details regarding implementation please visit For more details please visit https://developer.authorize.net/support/hash_upgrade/?utm_campaign=19Q2%20MD5%20Hash%20EOL%20Partner&utm_medium=email&utm_source=Eloqua for implementation details.
+
+
+import hashlib
+import hmac
+
+#SignatureKey is obtained from MINT interface
+signatureKey="14B9609FFE2378449B3C0886046DD3B0F20DF12DEB758E48B5FFE1B5875615F0D2A50F7DDB1EAC417EBF76A1FAC374079793650AA493CE127601CB0960938E82";
+transId="60115446835";
+apiLogin = "5T9cRn9FK";
+amount = "10.00";
+textToHash="^"+apiLogin+"^"+transId+"^"+amount+"^";
+
+
+def calculate_TransHashSha512(signatureKey,textToHash):
+    if(not signatureKey or  signatureKey ==''):
+        raise Exception('Signature key cannot be null or empty')
+    if(not textToHash or  textToHash ==''):
+        raise Exception('Signature key cannot be null or empty') 
+    if(len(signatureKey)%2!=0 or len(signatureKey)<2):
+        raise Exception("Parameter cannot be odd or less than 2 characters");
+    sign=hmac.new(signatureKey.decode("hex"), textToHash, hashlib.sha512).hexdigest().upper()
+    return sign
+
+transHashSha512=calculate_TransHashSha512(signatureKey,textToHash)
+print(transHashSha512)
+
