@@ -29,7 +29,7 @@ def get_customer_profile_transaction_list(customerProfileId):
                 print('Transaction Id : %s' % transaction.transId)
                 print('Transaction Status : %s' % transaction.transactionStatus)
                 print('Amount Type : %s' % transaction.accountType)
-                print('Settle Amount : %s' % transaction.settleAmount)
+                print('Settle Amount : %.2f' % transaction.settleAmount)
 
             if transactionListForCustomerResponse.messages is not None:
                 print('Message Code : %s' % transactionListForCustomerResponse.messages.message[0]['code'].text)

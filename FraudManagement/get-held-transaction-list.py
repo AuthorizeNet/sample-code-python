@@ -27,8 +27,8 @@ def get_unsettled_transaction_list():
             for transaction in unsettledTransactionListResponse.transactions.transaction:
                 print('Transaction Id : %s' % transaction.transId)
                 print('Transaction Status : %s' % transaction.transactionStatus)
-                print('Amount Type : %s' % transaction.accountType)
-                print('Settle Amount : %s' % transaction.settleAmount)
+                print('Amount Type : %.2f' % transaction.accountType)
+                print('Settle Amount : %.2f' % transaction.settleAmount)
 
             if unsettledTransactionListResponse.messages:
                 print('Message Code : %s' % unsettledTransactionListResponse.messages.message[0]['code'].text)

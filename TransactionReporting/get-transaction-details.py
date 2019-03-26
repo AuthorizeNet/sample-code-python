@@ -28,8 +28,8 @@ def get_transaction_details(transId):
             print('Transaction Id : %s' % transactionDetailsResponse.transaction.transId)
             print('Transaction Type : %s' % transactionDetailsResponse.transaction.transactionType)
             print('Transaction Status : %s' % transactionDetailsResponse.transaction.transactionStatus)
-            print('Auth Amount : %s' % transactionDetailsResponse.transaction.authAmount)
-            print('Settle Amount : %s' % transactionDetailsResponse.transaction.settleAmount)
+            print('Auth Amount : %.2f' % transactionDetailsResponse.transaction.authAmount)
+            print('Settle Amount : %.2f' % transactionDetailsResponse.transaction.settleAmount)
             if hasattr(transactionDetailsResponse.transaction, 'tax') == True:
                 print('Tax : %s' % transactionDetailsResponse.transaction.tax.amount)
             if hasattr(transactionDetailsResponse.transaction, 'profile'):
