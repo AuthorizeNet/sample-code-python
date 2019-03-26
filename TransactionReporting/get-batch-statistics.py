@@ -32,8 +32,8 @@ def get_batch_statistics():
 
             for statistic in batchStatisticsResponse.batch.statistics.statistic:
                 print('Account Type : %s' % statistic.accountType)
-                print('Charge Amount : %s' % statistic.chargeAmount)
-                print('Refund Amount : %s' % statistic.refundAmount)
+                print('Charge Amount : %.2f' % statistic.chargeAmount)
+                print('Refund Amount : %.2f' % statistic.refundAmount)
                 print('Decline Count : %s' % statistic.declineCount)
 
             if batchStatisticsResponse.messages is not None:
