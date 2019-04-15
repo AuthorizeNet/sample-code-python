@@ -573,6 +573,15 @@ class TestRunner(unittest.TestCase):
         modl = imp.load_source('modulename', 'TransactionReporting/get-transaction-list.py')
         return modl.get_transaction_list()
 
+    def get_transaction_list_for_customer(self):
+		print("get_transaction_list_for_customer")
+
+		#get transaction list for that above profile
+		modl = imp.load_source('modulename', 'TransactionReporting/get-customer-profile-transaction-list.py')
+		response = modl.get_customer_profile_transaction_list('36152127')
+
+		return response
+
     def get_unsettled_transaction_list(self):
         print("get_unsettled_transaction_list")
         modl = imp.load_source('modulename', 'TransactionReporting/get-unsettled-transaction-list.py')
