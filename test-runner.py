@@ -370,7 +370,7 @@ class TestRunner(unittest.TestCase):
     def debit_bank_account(self):
         print("debit_bank_account")
         modl = imp.load_source('modulename', 'PaymentTransactions/debit-bank-account.py')
-        return modl.debit_bank_account()
+        return modl.debit_bank_account(22.50)
 
     def refund_transaction(self):
         print("refund_transaction")
