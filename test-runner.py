@@ -595,7 +595,7 @@ class TestRunner(unittest.TestCase):
 
     def get_an_accept_payment_page(self):
         print("get_an_accept_payment_page")
-        modl = imp.load_source('modulename', 'PaymentTransactions/get-an-accept-payment-page.py')
+        modl = imp.load_source('modulename', 'AcceptSuite/get-an-accept-payment-page.py')
         return modl.get_an_accept_payment_page(self.getAmount())
 
     def update_held_transaction(self):
