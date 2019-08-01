@@ -20,7 +20,8 @@ matrix:
       # Will have to investigate further.
     - python: "pypy"
     - python: "pypy3"
-      # pypy will just crash due to an incompatibility with lxml.
+    - python: "3.4"
+      # pypy and 3.4 will just crash due to an incompatibility with lxml.
       # Newer versions of pypy seem to crash also, so we probably have to fix with a newer version of lxml
   
 install:
