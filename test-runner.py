@@ -578,15 +578,15 @@ class TestRunner(unittest.TestCase):
         modl = imp.load_source('modulename', 'TransactionReporting/get-unsettled-transaction-list.py')
         return modl.get_unsettled_transaction_list()
 
-    def create_visa_checkout_transaction(self):
-        print("create_visa_checkout_transaction")
+    def create_visa_src_transaction(self):
+        print("create_visa_src_transaction")
         modl = imp.load_source('modulename', 'VisaCheckout/create-visa-checkout-transaction.py')
-        return modl.create_visa_checkout_transaction()
+        return modl.create_visa_src_transaction()
 
-    def decrypt_visa_checkout_data(self):
-        print("decrypt_visa_checkout_data")
+    def decrypt_visa_src_data(self):
+        print("decrypt_visa_src_data")
         modl = imp.load_source('modulename', 'VisaCheckout/decrypt-visa-checkout-data.py')
-        return modl.decrypt_visa_checkout_data()
+        return modl.decrypt_visa_src_data()
 
     def get_merchant_details(self):
         print("get_merchant_details")

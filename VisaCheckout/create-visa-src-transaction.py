@@ -6,7 +6,7 @@ from authorizenet.apicontrollers import *
 constants = imp.load_source('modulename', 'constants.py')
 from decimal import *
 
-def create_visa_checkout_transaction():
+def create_visa_src_transaction():
 
     merchantAuth = apicontractsv1.merchantAuthenticationType()
     merchantAuth.name = constants.apiLoginId
@@ -60,4 +60,4 @@ def create_visa_checkout_transaction():
     return response
 
 if(os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-    create_visa_checkout_transaction()
+    create_visa_src_transaction()
