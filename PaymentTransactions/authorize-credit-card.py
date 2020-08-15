@@ -8,9 +8,7 @@ import sys
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import createTransactionController
-
-CONSTANTS = imp.load_source('modulename', 'constants.py')
-
+from authorizenet.constants import constants
 
 def authorize_credit_card(amount):
     """
@@ -20,8 +18,8 @@ def authorize_credit_card(amount):
     # Create a merchantAuthenticationType object with authentication details
     # retrieved from the constants file
     merchantAuth = apicontractsv1.merchantAuthenticationType()
-    merchantAuth.name = CONSTANTS.apiLoginId
-    merchantAuth.transactionKey = CONSTANTS.transactionKey
+    merchantAuth.name = constants.apiLoginId
+    merchantAuth.transactionKey = constants.transactionKey
 
     # Create the payment data for a credit card
     creditCard = apicontractsv1.creditCardType()
@@ -37,6 +35,7 @@ def authorize_credit_card(amount):
     order = apicontractsv1.orderType()
     order.invoiceNumber = "10101"
     order.description = "Golf Shirts"
+    order.discountAmount = "10"
 
     # Set the customer's Bill To address
     customerAddress = apicontractsv1.customerAddressType()
@@ -75,11 +74,16 @@ def authorize_credit_card(amount):
     line_item_2.description = "Here's the second line item"
     line_item_2.quantity = "3"
     line_item_2.unitPrice = "7.95"
+    line_item_2.unitOfMeasure = "2"
 
     # build the array of line items
     line_items = apicontractsv1.ArrayOfLineItem()
     line_items.lineItem.append(line_item_1)
     line_items.lineItem.append(line_item_2)
+
+    otherTax = apicontractsv1.otherTaxType()
+    otherTax.localTaxAmount="5"
+
 
     # Create a transactionRequestType object and add the previous objects to it.
     transactionrequest = apicontractsv1.transactionRequestType()
@@ -89,6 +93,7 @@ def authorize_credit_card(amount):
     transactionrequest.order = order
     transactionrequest.billTo = customerAddress
     transactionrequest.customer = customerData
+    transactionrequest.otherTax = otherTax
     transactionrequest.transactionSettings = settings
     transactionrequest.lineItems = line_items
 
@@ -148,4 +153,4 @@ def authorize_credit_card(amount):
 
 
 if (os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-    authorize_credit_card(CONSTANTS.amount)
+    authorize_credit_card(constants.amount)
