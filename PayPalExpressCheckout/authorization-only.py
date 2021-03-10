@@ -20,7 +20,7 @@ def authorization_only():
     payment.payPal = paypal
 
     transactionrequest = apicontractsv1.transactionRequestType()
-    transactionrequest.amount = Decimal(round(random.uniform(0, 100), 2))
+    transactionrequest.amount = Decimal(random.uniform(1, 100)).quantize(Decimal('0.01'))
     transactionrequest.transactionType = apicontractsv1.transactionTypeEnum.authOnlyTransaction
     transactionrequest.payment = payment
 
