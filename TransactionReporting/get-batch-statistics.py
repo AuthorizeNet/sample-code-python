@@ -14,7 +14,7 @@ def get_batch_statistics():
 
     batchStatisticsRequest = apicontractsv1.getBatchStatisticsRequest()
     batchStatisticsRequest.merchantAuthentication = merchantAuth
-    batchStatisticsRequest.batchId = "4532808"
+    batchStatisticsRequest.batchId = "11224814"
 
     batchStatisticsController = getBatchStatisticsController(batchStatisticsRequest)
 
@@ -25,6 +25,8 @@ def get_batch_statistics():
     if batchStatisticsResponse is not None:
         if batchStatisticsResponse.messages.resultCode == apicontractsv1.messageTypeEnum.Ok:
             print('Successfully got batch statistics!')
+
+            print('Batch :\n', batchStatisticsResponse)
 
             print('Batch Id : %s' % batchStatisticsResponse.batch.batchId)
             print('Batch Settlement State : %s' % batchStatisticsResponse.batch.settlementState)

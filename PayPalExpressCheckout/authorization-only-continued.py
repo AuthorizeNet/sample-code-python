@@ -14,14 +14,14 @@ def authorization_only_continued():
     paypal = apicontractsv1.payPalType()
     paypal.successUrl = "http://www.merchanteCommerceSite.com/Success/TC25262"
     paypal.cancelUrl = "http://www.merchanteCommerceSite.com/Success/TC25262"
-    paypal.payerID = "LM6NCLZ5RAKBY"
+    paypal.payerID = "586E72QHPGHXS"
 
     payment = apicontractsv1.paymentType()
     payment.payPal = paypal
 
     transactionrequest = apicontractsv1.transactionRequestType()
     transactionrequest.transactionType = apicontractsv1.transactionTypeEnum.authOnlyContinueTransaction
-    transactionrequest.refTransId = "2245592542"
+    transactionrequest.refTransId = "60158280211"
     transactionrequest.payment = payment
 
     request = apicontractsv1.createTransactionRequest()

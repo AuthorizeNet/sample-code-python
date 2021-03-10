@@ -18,7 +18,7 @@ def create_subscription(amount, days):
     paymentschedule.interval = apicontractsv1.paymentScheduleTypeInterval() #apicontractsv1.CTD_ANON() #modified by krgupta
     paymentschedule.interval.length = days
     paymentschedule.interval.unit = apicontractsv1.ARBSubscriptionUnitEnum.days
-    paymentschedule.startDate = datetime(2020, 8, 30)
+    paymentschedule.startDate = datetime(2020, 12, 30)
     paymentschedule.totalOccurrences = 12
     paymentschedule.trialOccurrences = 1
     # Giving the credit card info

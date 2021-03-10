@@ -27,8 +27,8 @@ update_split_tender_group	1	0
 void_transaction	1	0
 authorization_and_capture_continued	1	1
 authorization_and_capture	1	1
-authorization_only_continued	1	1
-authorization_only	1	0
+authorization_only_continued	1	0
+authorization_only	1	1
 credit	1	0
 get_details	1	0
 prior_authorization_capture	1	0
@@ -47,7 +47,7 @@ get_batch_statistics	1	1
 get_settled_batch_list	1	1
 get_transaction_details	1	0
 get_transaction_list	1	1
-get_transaction_list_for_customer	1	1
+get_transaction_list_for_customer	1	0
 get_unsettled_transaction_list	1	0
 create_visa_src_transaction	1	0
 decrypt_visa_src_data	1	0
