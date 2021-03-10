@@ -13,7 +13,7 @@ def create_chase_pay_transaction():
 
     creditCard = apicontractsv1.creditCardType()
     creditCard.cardNumber = "4111111111111111"
-    creditCard.expirationDate = "2020-12"
+    creditCard.expirationDate = "2035-12"
     creditCard.cardCode="999"
     # Set the token specific info
     creditCard.isPaymentToken = True

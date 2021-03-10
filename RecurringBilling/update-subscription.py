@@ -12,7 +12,7 @@ def update_subscription(subscriptionId):
 
     creditcard = apicontractsv1.creditCardType()
     creditcard.cardNumber = "4111111111111111"
-    creditcard.expirationDate = "2020-12"
+    creditcard.expirationDate = "2035-12"
 
     payment = apicontractsv1.paymentType()
     payment.creditCard = creditcard

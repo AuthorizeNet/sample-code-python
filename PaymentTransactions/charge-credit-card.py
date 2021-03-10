@@ -26,7 +26,7 @@ def charge_credit_card(amount):
     # Create the payment data for a credit card
     creditCard = apicontractsv1.creditCardType()
     creditCard.cardNumber = "4111111111111111"
-    creditCard.expirationDate = "2020-12"
+    creditCard.expirationDate = "2035-12"
     creditCard.cardCode = "123"
 
     # Add the payment data to a paymentType object

@@ -12,7 +12,7 @@ def update_customer_payment_profile(customerProfileId, customerPaymentProfileId)
 
     creditCard = apicontractsv1.creditCardType()
     creditCard.cardNumber = "4111111111111111"
-    creditCard.expirationDate = "2020-12"
+    creditCard.expirationDate = "2035-12"
 
     payment = apicontractsv1.paymentType()
     payment.creditCard = creditCard
