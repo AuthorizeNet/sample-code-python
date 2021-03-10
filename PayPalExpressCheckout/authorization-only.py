@@ -19,7 +19,7 @@ def authorization_only():
     payment.payPal = paypal
 
     transactionrequest = apicontractsv1.transactionRequestType()
-    transactionrequest.amount = Decimal('55.00')
+    transactionrequest.amount = Decimal('53.00')
     transactionrequest.transactionType = apicontractsv1.transactionTypeEnum.authOnlyTransaction
     transactionrequest.payment = payment
 
