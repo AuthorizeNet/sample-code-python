@@ -1,5 +1,6 @@
 import os, sys
 import imp
+import random
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
@@ -19,7 +20,7 @@ def authorization_only():
     payment.payPal = paypal
 
     transactionrequest = apicontractsv1.transactionRequestType()
-    transactionrequest.amount = Decimal('53.00')
+    transactionrequest.amount = Decimal(round(random.uniform(0, 100), 2))
     transactionrequest.transactionType = apicontractsv1.transactionTypeEnum.authOnlyTransaction
     transactionrequest.payment = payment
 
