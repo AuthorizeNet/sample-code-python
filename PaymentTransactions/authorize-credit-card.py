@@ -148,4 +148,4 @@ def authorize_credit_card(amount):
 
 
 if (os.path.basename(__file__) == os.path.basename(sys.argv[0])):
-    authorize_credit_card(CONSTANTS.amount + 100)
+    authorize_credit_card(CONSTANTS.amount + str(100))
