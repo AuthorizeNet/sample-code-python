@@ -1,6 +1,10 @@
 import os, sys
 import imp
 import time
+import pathlib
+import glob
+
+#this library will allow the user to record the time of the transaction
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
