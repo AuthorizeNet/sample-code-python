@@ -2,14 +2,14 @@
 Authorize a credit card (without actually charging it)
 """
 
-import imp
+from importlib.machinery import SourceFileLoader
 import os
 import sys
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import createTransactionController
 
-CONSTANTS = imp.load_source('modulename', 'constants.py')
+CONSTANTS = SourceFileLoader('modulename', 'constants.py').load_module()
 
 
 def authorize_credit_card(amount):

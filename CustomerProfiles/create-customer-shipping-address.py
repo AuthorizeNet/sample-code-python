@@ -1,10 +1,10 @@
 import os, sys
-import imp
+from importlib.machinery import SourceFileLoader
 
 # Gives error if an address is already present for the given customer Id
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
-constants = imp.load_source('modulename', 'constants.py')
+constants = SourceFileLoader('modulename', 'constants.py').load_module()
 
 def create_customer_shipping_address(customerProfileId):
     # Give merchant details

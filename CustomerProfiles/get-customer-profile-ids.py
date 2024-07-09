@@ -1,11 +1,11 @@
 """http://developer.authorize.net/api/reference/index.html#customer-profiles-get-customer-profile-ids"""
 import os
 import sys
-import imp
+from importlib.machinery import SourceFileLoader
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import getCustomerProfileIdsController
-constants = imp.load_source('modulename', 'constants.py')
+constants = SourceFileLoader('modulename', 'constants.py').load_module()
 
 def get_customer_profile_ids():
     """get customer profile IDs"""

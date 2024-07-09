@@ -1,11 +1,11 @@
 """http://developer.authorize.net/api/reference/#recurring-billing-get-a-list-of-subscriptions"""
 import os
 import sys
-import imp
+from importlib.machinery import SourceFileLoader
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import ARBGetSubscriptionListController
-constants = imp.load_source('modulename', 'constants.py')
+constants = SourceFileLoader('modulename', 'constants.py').load_module()
 
 def get_list_of_subscriptions():
     """get list of subscriptions"""

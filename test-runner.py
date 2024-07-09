@@ -1,6 +1,6 @@
 import unittest
 import sys
-import imp
+from importlib.machinery import SourceFileLoader
 import random
 from authorizenet import apicontractsv1
 import pyxb
@@ -20,32 +20,32 @@ class TestRunner(unittest.TestCase):
 
     def create_an_apple_pay_transaction(self):
         print("create_an_apple_pay_transaction")
-        modl = imp.load_source('modulename', 'MobileInappTransactions/create-an-apple-pay-transaction.py')
+        modl = SourceFileLoader('modulename', 'MobileInappTransactions/create-an-apple-pay-transaction.py').load_module()
         return modl.create_an_apple_pay_transaction()
 
     def create_an_accept_transaction(self):
         print("create_an_accept_transaction")
-        modl = imp.load_source('modulename', 'MobileInappTransactions/create-an-accept-transaction.py')
+        modl = SourceFileLoader('modulename', 'MobileInappTransactions/create-an-accept-transaction.py').load_module()
         return modl.create_an_accept_transaction()
 
     def create_an_android_pay_transaction(self):
         print("create_an_android_pay_transaction")
-        modl = imp.load_source('modulename', 'MobileInappTransactions/create-an-android-pay-transaction.py')
+        modl = SourceFileLoader('modulename', 'MobileInappTransactions/create-an-android-pay-transaction.py').load_module().
         return modl.create_an_android_pay_transaction()
 
     def create_customer_payment_profile(self):
         print("create_customer_payment_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
 
         #create customer payment profile for that above profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-payment-profile.py').load_module()
         response = modl.create_customer_payment_profile(str(response.customerProfileId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(str(response.customerProfileId))
 
         return response
@@ -54,26 +54,26 @@ class TestRunner(unittest.TestCase):
         print("create_customer_profile_from_transaction")
 
         #Create transaction
-        modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/authorize-credit-card.py').load_module()
         response = modl.authorize_credit_card(self.getAmount())
 
         #create customer payment profile for above transaction
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile-from-transaction.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile-from-transaction.py').load_module()
         response = modl.create_customer_profile_from_transaction(str(response.transactionResponse.transId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(str(response.customerProfileId))
 
         return response
 
     def create_customer_profile(self):
         print("create_customer_profile")
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(str(response.customerProfileId))
 
         return response
@@ -82,14 +82,14 @@ class TestRunner(unittest.TestCase):
         print("create_customer_shipping_address")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-shipping-address.py').load_module()
         response = modl.create_customer_shipping_address(str(response.customerProfileId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(str(response.customerProfileId))
 
         return response
@@ -98,19 +98,19 @@ class TestRunner(unittest.TestCase):
         print("delete_customer_payment_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
         #create customer payment profile for that above profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-payment-profile.py').load_module()
         response = modl.create_customer_payment_profile(str(response.customerProfileId))
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-payment-profile.py').load_module()
         response = modl.delete_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -120,28 +120,28 @@ class TestRunner(unittest.TestCase):
         print("delete_customer_profile")
 
         #Create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         return modl.delete_customer_profile(str(response.customerProfileId))
 
     def delete_customer_shipping_address(self):
         print("delete_customer_shipping_address")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-shipping-address.py').load_module()
         response = modl.create_customer_shipping_address(customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-shipping-address.py').load_module()
         response = modl.delete_customer_shipping_address(customerProfileId, str(response.customerAddressId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -150,46 +150,46 @@ class TestRunner(unittest.TestCase):
         print("get_customer_payment_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
         #create customer payment profile for that above profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-payment-profile.py').load_module()
         response = modl.create_customer_payment_profile(customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/get-customer-payment-profile.py').load_module()
         response = modl.get_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
 
     def get_customer_payment_profile_list(self):
         print("get_customer_payment_profile_list")
-        modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-payment-profile-list.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/get-customer-payment-profile-list.py').load_module()
         return modl.get_customer_payment_profile_list()
 
     def get_customer_profile_ids(self):
         print("get_customer_profile_ids")
-        modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-profile-ids.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/get-customer-profile-ids.py').load_module()
         return modl.get_customer_profile_ids()
 
     def get_customer_profile(self):
         print("get_customer_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/get-customer-profile.py').load_module()
         response = modl.get_customer_profile(customerProfileId)
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -198,18 +198,18 @@ class TestRunner(unittest.TestCase):
         print("get_customer_shipping_address")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-shipping-address.py').load_module()
         response = modl.create_customer_shipping_address(customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/get-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/get-customer-shipping-address.py').load_module()
         response = modl.get_customer_shipping_address(customerProfileId, str(response.customerAddressId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -218,15 +218,15 @@ class TestRunner(unittest.TestCase):
         print("get_hosted_profile_page")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/get-hosted-profile-page.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/get-hosted-profile-page.py').load_module()
         response = modl.get_hosted_profile_page(customerProfileId)
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -235,20 +235,20 @@ class TestRunner(unittest.TestCase):
         print("update_customer_payment_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
         #create customer payment profile for that above profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-payment-profile.py').load_module()
         response = modl.create_customer_payment_profile(customerProfileId)
 
         if hasattr(response, 'customerProfileId') == True:
-            modl = imp.load_source('modulename', 'CustomerProfiles/update-customer-payment-profile.py')
+            modl = SourceFileLoader('modulename', 'CustomerProfiles/update-customer-payment-profile.py').load_module()
             response = modl.update_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 
             #delete newly create customer profile
-            modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+            modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
             modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -257,15 +257,15 @@ class TestRunner(unittest.TestCase):
         print("update_customer_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/update-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/update-customer-profile.py').load_module()
         response = modl.update_customer_profile(customerProfileId)
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -274,18 +274,18 @@ class TestRunner(unittest.TestCase):
         print("update_customer_shipping_address")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-shipping-address.py').load_module()
         response = modl.create_customer_shipping_address(customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/update-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/update-customer-shipping-address.py').load_module()
         response = modl.update_customer_shipping_address(customerProfileId, str(response.customerAddressId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
@@ -295,175 +295,175 @@ class TestRunner(unittest.TestCase):
         print("validate_customer_payment_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
         #create customer payment profile for that above profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-payment-profile.py').load_module()
         response = modl.create_customer_payment_profile(customerProfileId)
 
-        modl = imp.load_source('modulename', 'CustomerProfiles/validate-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/validate-customer-payment-profile.py').load_module()
         response = modl.validate_customer_payment_profile(customerProfileId, str(response.customerPaymentProfileId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
 
     def authorize_credit_card(self):
         print("authorize_credit_card")
-        modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/authorize-credit-card.py').load_module()
         return modl.authorize_credit_card(self.getAmount())
 
     def capture_funds_authorized_through_another_channel(self):
         print("capture_funds_authorized_through_another_channel")
-        modl = imp.load_source('modulename', 'PaymentTransactions/capture-funds-authorized-through-another-channel.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/capture-funds-authorized-through-another-channel.py').load_module()
         return modl.capture_funds_authorized_through_another_channel()
 
     def capture_previously_authorized_amount(self):
         print("capture_previously_authorized_amount")
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/authorize-credit-card.py').load_module()
         response = modl.authorize_credit_card(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/capture-previously-authorized-amount.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/capture-previously-authorized-amount.py').load_module()
         return modl.capture_previously_authorized_amount(response.transactionResponse.transId)
 
     def charge_credit_card(self):
         print("charge_credit_card")
-        modl = imp.load_source('modulename', 'PaymentTransactions/charge-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/charge-credit-card.py').load_module()
         return modl.charge_credit_card(self.getAmount())
 
     def charge_customer_profile(self):
         print("charge_customer_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         response = modl.create_customer_profile()
         customerProfileId = str(response.customerProfileId)
 
         #create customer payment profile for that above profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-payment-profile.py').load_module()
         response = modl.create_customer_payment_profile(customerProfileId)
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/charge-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/charge-customer-profile.py').load_module()
         response = modl.charge_customer_profile(customerProfileId, str(response.customerPaymentProfileId), self.getAmount())
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(customerProfileId)
 
         return response
 
     def charge_tokenized_credit_card(self):
         print("charge_tokenized_credit_card")
-        modl = imp.load_source('modulename', 'PaymentTransactions/charge-tokenized-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/charge-tokenized-credit-card.py').load_module()
         return modl.charge_tokenized_credit_card()
 
     def credit_bank_account(self):
         print("credit_bank_account")
-        modl = imp.load_source('modulename', 'PaymentTransactions/credit-bank-account.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/credit-bank-account.py').load_module()
         return modl.credit_bank_account()
 
     def debit_bank_account(self):
         print("debit_bank_account")
-        modl = imp.load_source('modulename', 'PaymentTransactions/debit-bank-account.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/debit-bank-account.py').load_module()
         return modl.debit_bank_account(str(round(random.random()*100, 2)))
 
     def refund_transaction(self):
         print("refund_transaction")
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/authorize-credit-card.py').load_module()
         response = modl.authorize_credit_card(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/refund-transaction.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/refund-transaction.py').load_module()
         return modl.refund_transaction(response.transactionResponse.transId)
 
     def update_split_tender_group(self):
         print("update_split_tender_group")
-        modl = imp.load_source('modulename', 'PaymentTransactions/update-split-tender-group.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/update-split-tender-group.py').load_module()
         return modl.update_split_tender_group()
 
     def void_transaction(self):
         print("void_transaction")
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/authorize-credit-card.py').load_module()
         response = modl.authorize_credit_card(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/void-transaction.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/void-transaction.py').load_module()
         return modl.void_transaction(response.transactionResponse.transId)
 
     def authorization_and_capture_continued(self):
         print("authorization_and_capture_continued")
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-and-capture.py').load_module()
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture-continued.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-and-capture-continued.py').load_module()
         return modl.authorization_and_capture_continued(str(response.transactionResponse.transId), "6ZSCSYG33VP8Q")
 
     def authorization_and_capture(self):
         print("authorization_and_capture")
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-and-capture.py').load_module()
         return modl.authorization_and_capture(self.getAmount())
 
     def authorization_only_continued(self):
         print("authorization_only_continued")
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-only-continued.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-only-continued.py').load_module()
         return modl.authorization_only_continued()
 
     def authorization_only(self):
         print("authorization_only")
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-only.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-only.py').load_module()
         return modl.authorization_only()
 
     def credit(self):
         print("credit")
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/credit.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/credit.py').load_module()
         return modl.credit()
 
     def get_details(self):
         print("get_details")
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-and-capture.py').load_module()
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/get-details.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/get-details.py').load_module()
         return modl.get_details(str(response.transactionResponse.transId))
 
     def prior_authorization_capture(self):
         print("prior_authorization_capture")
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-and-capture.py').load_module()
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/prior-authorization-capture.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/prior-authorization-capture.py').load_module()
         return modl.prior_authorization_capture(str(response.transactionResponse.transId))
 
     def void(self):
         print("void")
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/authorization-and-capture.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/authorization-and-capture.py').load_module()
         response = modl.authorization_and_capture(self.getAmount())
 
-        modl = imp.load_source('modulename', 'PayPalExpressCheckout/void.py')
+        modl = SourceFileLoader('modulename', 'PayPalExpressCheckout/void.py').load_module()
         return modl.void(str(response.transactionResponse.transId))
 
     def cancel_subscription(self):
         print("cancel_subscription")
 
-        modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/create-subscription.py').load_module()
         response = modl.create_subscription(self.getAmount(), self.getDay())
 
-        modl = imp.load_source('modulename', 'RecurringBilling/cancel-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/cancel-subscription.py').load_module()
         return modl.cancel_subscription(response.subscriptionId)
 
     def create_subscription(self):
         print("create_subscription")
 
-        modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/create-subscription.py').load_module()
         return modl.create_subscription(self.getAmount(), self.getDay())
 
 
@@ -471,29 +471,29 @@ class TestRunner(unittest.TestCase):
         print("create_subscription_from_customer_profile")
 
         #create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-profile.py').load_module()
         profileResponse = modl.create_customer_profile()
 
         #create customer payment profile for that above profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-payment-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-payment-profile.py').load_module()
         paymentProfileResponse = modl.create_customer_payment_profile(str(profileResponse.customerProfileId))
 
         #Create customer shipping address
-        modl = imp.load_source('modulename', 'CustomerProfiles/create-customer-shipping-address.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/create-customer-shipping-address.py').load_module()
         shippingResponse = modl.create_customer_shipping_address(str(profileResponse.customerProfileId))
 
         time.sleep(10)
 
         #Create subscripiton from customer profile
-        modl = imp.load_source('modulename', 'RecurringBilling/create-subscription-from-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/create-subscription-from-customer-profile.py').load_module()
         response = modl.create_subscription_from_customer_profile(self.getAmount(), self.getDay(), str(profileResponse.customerProfileId), str(paymentProfileResponse.customerPaymentProfileId), str(shippingResponse.customerAddressId))
 
         #Cancel subscription
-        modl = imp.load_source('modulename', 'RecurringBilling/cancel-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/cancel-subscription.py').load_module()
         modl.cancel_subscription(str(response.subscriptionId))
 
         #delete newly create customer profile
-        modl = imp.load_source('modulename', 'CustomerProfiles/delete-customer-profile.py')
+        modl = SourceFileLoader('modulename', 'CustomerProfiles/delete-customer-profile.py').load_module()
         modl.delete_customer_profile(str(profileResponse.customerProfileId))
 
         return response
@@ -501,20 +501,20 @@ class TestRunner(unittest.TestCase):
     def get_list_of_subscriptions(self):
         print("get_list_of_subscriptions")
 
-        modl = imp.load_source('modulename', 'RecurringBilling/get-list-of-subscriptions.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/get-list-of-subscriptions.py').load_module()
         return modl.get_list_of_subscriptions()
 
     def get_subscription_status(self):
         print("get_subscription_status")
 
-        modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/create-subscription.py').load_module()
         response = modl.create_subscription(self.getAmount(), self.getDay())
         subscriptionId = response.subscriptionId
 
-        modl = imp.load_source('modulename', 'RecurringBilling/get-subscription-status.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/get-subscription-status.py').load_module()
         response = modl.get_subscription_status(subscriptionId)
 
-        modl = imp.load_source('modulename', 'RecurringBilling/cancel-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/cancel-subscription.py').load_module()
         modl.cancel_subscription(subscriptionId)
 
         return response
@@ -522,14 +522,14 @@ class TestRunner(unittest.TestCase):
     def get_subscription(self):
         print("get_subscription")
 
-        modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/create-subscription.py').load_module()
         response = modl.create_subscription(self.getAmount(), self.getDay())
         subscriptionId = str(response.subscriptionId)
 
-        modl = imp.load_source('modulename', 'RecurringBilling/get-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/get-subscription.py').load_module()
         response = modl.get_subscription(subscriptionId)
 
-        modl = imp.load_source('modulename', 'RecurringBilling/cancel-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/cancel-subscription.py').load_module()
         modl.cancel_subscription(subscriptionId)
 
         return response
@@ -537,76 +537,76 @@ class TestRunner(unittest.TestCase):
     def update_subscription(self):
         print("update_subscription")
 
-        modl = imp.load_source('modulename', 'RecurringBilling/create-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/create-subscription.py').load_module()
         response = modl.create_subscription(self.getAmount(), self.getDay())
         subscriptionId = str(response.subscriptionId)
 
-        modl = imp.load_source('modulename', 'RecurringBilling/update-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/update-subscription.py').load_module()
         response = modl.update_subscription(subscriptionId)
 
-        modl = imp.load_source('modulename', 'RecurringBilling/cancel-subscription.py')
+        modl = SourceFileLoader('modulename', 'RecurringBilling/cancel-subscription.py').load_module()
         modl.cancel_subscription(subscriptionId)
 
         return response
 
     def get_batch_statistics(self):
         print("get_batch_statistics")
-        modl = imp.load_source('modulename', 'TransactionReporting/get-batch-statistics.py')
+        modl = SourceFileLoader('modulename', 'TransactionReporting/get-batch-statistics.py').load_module()
         return modl.get_batch_statistics()
 
     def get_settled_batch_list(self):
         print("get_settled_batch_list")
-        modl = imp.load_source('modulename', 'TransactionReporting/get-settled-batch-list.py')
+        modl = SourceFileLoader('modulename', 'TransactionReporting/get-settled-batch-list.py').load_module()
         return modl.get_settled_batch_list()
 
     def get_transaction_details(self):
         print("get_transaction_details")
 
-        modl = imp.load_source('modulename', 'PaymentTransactions/authorize-credit-card.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/authorize-credit-card.py').load_module()
         response = modl.authorize_credit_card(self.getAmount())
 
-        modl = imp.load_source('modulename', 'TransactionReporting/get-transaction-details.py')
+        modl = SourceFileLoader('modulename', 'TransactionReporting/get-transaction-details.py').load_module()
         return modl.get_transaction_details(response.transactionResponse.transId)
 
     def get_transaction_list(self):
         print("get_transaction_list")
-        modl = imp.load_source('modulename', 'TransactionReporting/get-transaction-list.py')
+        modl = SourceFileLoader('modulename', 'TransactionReporting/get-transaction-list.py').load_module()
         return modl.get_transaction_list()
 
     def get_unsettled_transaction_list(self):
         print("get_unsettled_transaction_list")
-        modl = imp.load_source('modulename', 'TransactionReporting/get-unsettled-transaction-list.py')
+        modl = SourceFileLoader('modulename', 'TransactionReporting/get-unsettled-transaction-list.py').load_module()
         return modl.get_unsettled_transaction_list()
 
     def create_visa_src_transaction(self):
         print("create_visa_src_transaction")
-        modl = imp.load_source('modulename', 'VisaCheckout/create-visa-checkout-transaction.py')
+        modl = SourceFileLoader('modulename', 'VisaCheckout/create-visa-checkout-transaction.py').load_module()
         return modl.create_visa_src_transaction()
 
     def decrypt_visa_src_data(self):
         print("decrypt_visa_src_data")
-        modl = imp.load_source('modulename', 'VisaCheckout/decrypt-visa-checkout-data.py')
+        modl = SourceFileLoader('modulename', 'VisaCheckout/decrypt-visa-checkout-data.py').load_module()
         return modl.decrypt_visa_src_data()
 
     def get_merchant_details(self):
         print("get_merchant_details")
-        modl = imp.load_source('modulename', 'TransactionReporting/get-merchant-details.py')
+        modl = SourceFileLoader('modulename', 'TransactionReporting/get-merchant-details.py').load_module()
         return modl.get_merchant_details()
 
     def get_an_accept_payment_page(self):
         print("get_an_accept_payment_page")
-        modl = imp.load_source('modulename', 'AcceptSuite/get-an-accept-payment-page.py')
+        modl = SourceFileLoader('modulename', 'AcceptSuite/get-an-accept-payment-page.py').load_module()
         return modl.get_an_accept_payment_page(self.getAmount())
 
     def update_held_transaction(self):
         print("update_held_transaction")
-        modl = imp.load_source('modulename', 'PaymentTransactions/update-held-transaction.py')
+        modl = SourceFileLoader('modulename', 'PaymentTransactions/update-held-transaction.py').load_module()
         return modl.update_held_transaction("12345")
     # added new method
     def get_account_updater_job_details(self):
         print("get_account_updater_job_details")
 
-        modl = imp.load_source('modulename', 'TransactionReporting/get-account-updater-job-details.py')
+        modl = SourceFileLoader('modulename', 'TransactionReporting/get-account-updater-job-details.py').load_module()
         return modl.get_account_updater_job_details()
 
     def validate_response(self, response):

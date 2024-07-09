@@ -1,9 +1,9 @@
 import os, sys
-import imp
+from importlib.machinery import SourceFileLoader
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import *
-constants = imp.load_source('modulename', 'constants.py')
+constants = SourceFileLoader('modulename', 'constants.py').load_module()
 from decimal import *
 
 def get_accept_customer_profile_page(customerProfileId):

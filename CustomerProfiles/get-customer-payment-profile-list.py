@@ -1,12 +1,12 @@
 """http://developer.authorize.net/api/reference/#customer-profiles-get-customer-payment-profile-list"""
 import os
 import sys
-import imp
+from importlib.machinery import SourceFileLoader
 import time
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import getCustomerPaymentProfileListController
-constants = imp.load_source('modulename', 'constants.py')
+constants = SourceFileLoader('modulename', 'constants.py').load_module()
 
 
 def get_customer_payment_profile_list():
