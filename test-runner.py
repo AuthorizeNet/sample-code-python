@@ -30,7 +30,7 @@ class TestRunner(unittest.TestCase):
 
     def create_an_android_pay_transaction(self):
         print("create_an_android_pay_transaction")
-        modl = SourceFileLoader('modulename', 'MobileInappTransactions/create-an-android-pay-transaction.py').load_module().
+        modl = SourceFileLoader('modulename', 'MobileInappTransactions/create-an-android-pay-transaction.py').load_module()
         return modl.create_an_android_pay_transaction()
 
     def create_customer_payment_profile(self):
