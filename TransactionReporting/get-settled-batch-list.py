@@ -1,12 +1,12 @@
 """http://developer.authorize.net/api/reference/index.html#transaction-reporting-get-settled-batch-list"""
 import os
 import sys
-import imp
+from importlib.machinery import SourceFileLoader
 
 from datetime import datetime, timedelta
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import getSettledBatchListController
-constants = imp.load_source('modulename', 'constants.py')
+constants = SourceFileLoader('modulename', 'constants.py').load_module()
 
 def get_settled_batch_list():
     """get settled batch list"""

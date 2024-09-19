@@ -2,7 +2,7 @@
 Credit a bank account
 """
 
-import imp
+from importlib.machinery import SourceFileLoader
 import os
 import sys
 import random
@@ -10,7 +10,7 @@ import random
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import createTransactionController
 
-CONSTANTS = imp.load_source('modulename', 'constants.py')
+CONSTANTS = SourceFileLoader('modulename', 'constants.py').load_module()
 
 
 def credit_bank_account(amount):
