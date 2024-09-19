@@ -19,8 +19,8 @@ def create_customer_payment_profile(customerProfileId):
     payment.creditCard = creditCard
 
     billTo = apicontractsv1.customerAddressType()
-    billTo.firstName = "John" + random.randint(0, 10000)
-    billTo.lastName = "Snow" + random.randint(0, 10000)
+    billTo.firstName = "John" + str(random.randint(0, 10000))
+    billTo.lastName = "Snow" + str(random.randint(0, 10000))
 
     profile = apicontractsv1.customerPaymentProfileType()
     profile.payment = payment
