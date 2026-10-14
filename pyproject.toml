@@ -1,0 +1,19 @@
+[project]
+name = "sample-code-python"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "V", email = "venkata.nagireddy@symphonize.com" }
+]
+requires-python = ">=3.12.8"
+dependencies = [
+    "authorizenet>=1.1.6",
+]
+
+[project.scripts]
+sample-code-python = "sample_code_python:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
